@@ -16,12 +16,17 @@
             this.httpClient = new HttpClient(clientHandler);
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
             httpClient.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-            httpClient.BaseAddress = new Uri(string.Format("{0}/apxlogin/api/odata/v1", serviceUrl));
+            httpClient.BaseAddress = new Uri(string.Format("{0}/apxis/api/odata/v1", serviceUrl));
         }
 
         public string GetMetadata()
         {
             return this.HttpGet("$metadata");
+        }
+
+        public string GetPortfolios()
+        {
+            return this.HttpGet("Portfolios");
         }
 
         private string HttpGet(string relativeUri)

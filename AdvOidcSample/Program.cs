@@ -8,11 +8,10 @@ namespace AdvOidcSample
     {
         static void Main(string[] args)
         {
-            var result =
-            Program.PasswordFlow();
-            //Program.WindowsAuthFlow();
-            //Program.AuthorizationCodeFlow();
-            Program.Print(result);
+            var result = Program.PasswordFlow();
+            Print(result);
+      
+           
         }
 
         static LoginResult AuthorizationCodeFlow()
@@ -20,7 +19,7 @@ namespace AdvOidcSample
             Console.WriteLine("Authorization Code flow");
             var client = new AdvIdentityClient
             {
-                Issuer = "https://vmapxba9.advent.com:5001",
+                Issuer = "http://vmapxba9.advent.com",
                 ClientId = "authcode.apxui",
                 ClientSecret = "advs",
                 Scope = "openid apxapi offline_access"
@@ -35,13 +34,13 @@ namespace AdvOidcSample
             Console.WriteLine("Resource Owner Passord flow");
             var client = new AdvIdentityClient
             {
-                Issuer = "https://vmapxba9.advent.com:5001",
+                Issuer = "http://vmapxba9.advent.com",
                 ClientId = "ro.APXAPIClient",
                 ClientSecret = "advs",
                 Scope = "apxapi offline_access"
             };
 
-            var result = client.Login("pm", "advs");
+            var result = client.Login("admin", "advs");
             return result;
         }
 
@@ -50,7 +49,7 @@ namespace AdvOidcSample
             Console.WriteLine("Windows Authentiation flow");
             var client = new AdvIdentityClient
             {
-                Issuer = "https://vmapxba9.advent.com:5001",
+                Issuer = "http://vmapxba9.advent.com",
                 ClientId = "ro.APXAPIClient",
                 ClientSecret = "advs",
                 Scope = "apxapi offline_access"
