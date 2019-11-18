@@ -57,19 +57,23 @@ namespace AdvOidcSample
 
             this.BypassSelfSignedCertificateValidationError();
 
-            var client = new HttpClient();
-            var response = client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
-            {
-                Address = address,
-                Policy = { RequireHttps = false }
-            });
+            //var client = new HttpClient();
+            //var response = client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            //{
+            //    Address = address,
+            //    Policy = { RequireHttps = false }
+            //});
+
+            var cache = new DiscoveryCache(address, new DiscoveryPolicy() { RequireHttps = false });
+            var response = cache.GetAsync();
             response.Wait();
-            if (response.IsFaulted)
+            var disco = response.Result;
+            if (disco.IsError)
             {
-                throw response.Exception;
+                throw new Exception(disco.Error);
             }
 
-            return response.Result;
+            return disco;
         }
 
         /// <summary>
