@@ -48,17 +48,21 @@ namespace AdvOidcSample
 
         private DiscoveryDocumentResponse discovery;
 
-        private DiscoveryDocumentResponse GetDiscoveryDocument(string Issuer)
+        private DiscoveryDocumentResponse GetDiscoveryDocument(string address)
         {
-            if (string.IsNullOrEmpty(Issuer))
+            if (string.IsNullOrEmpty(address))
             {
-                throw new ArgumentNullException("Issuer can't be null or empty.");
+                throw new ArgumentNullException("address can't be null or empty.");
             }
 
             this.BypassSelfSignedCertificateValidationError();
 
             var client = new HttpClient();
-            var response = client.GetDiscoveryDocumentAsync(Issuer);
+            var response = client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = address,
+                Policy = { RequireHttps = false }
+            });
             response.Wait();
             if (response.IsFaulted)
             {
