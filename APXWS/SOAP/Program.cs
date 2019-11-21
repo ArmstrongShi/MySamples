@@ -9,15 +9,27 @@ namespace Advent.ApxSoap
     {
         static void Main(string[] args)
         {
-            using (ApxSoapApiProxy proxy = 
-                new ApxSoapApiProxy(
-                    ConfigurationManager.AppSettings["LoginName"], 
-                    ConfigurationManager.AppSettings["Password"]))
+            //using (ApxSoapApiProxy proxy = 
+            //    new ApxSoapApiProxy(
+            //        ConfigurationManager.AppSettings["LoginName"], 
+            //        ConfigurationManager.AppSettings["Password"]))
             //using (ApxSoapApiProxy proxy = new ApxSoapApiProxy())
-            {
-                Program.Sample_UpdateUser(proxy.ApxWS);
-                Program.Sample_CreateNewUser(proxy.ApxWS);
-            }
+            //{
+            //    Program.Sample_CreateNewUser(proxy.ApxWS);
+            //}
+
+            Program.Sample_TokenBasedAuth();
+        }
+
+        private static void Sample_TokenBasedAuth()
+        {
+            ApxWS.ApxWS apxws = new ApxWS.ApxWS();
+            apxws.AccessToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IkNBNkMxN0ZCMDFCRTg1RUU2QjJCMjAwNTE2ODZBRkYwN0M5REMwQTciLCJ0eXAiOiJKV1QiLCJ4NXQiOiJ5bXdYLXdHLWhlNXJLeUFGRm9hdjhIeWR3S2MifQ.eyJuYmYiOjE1NzQzMTY4NDUsImV4cCI6MTU3NDMyNDA0NSwiaXNzIjoiaHR0cDovL3ZtYXB4YmE5LmFkdmVudC5jb20vb2F1dGgiLCJhdWQiOlsiaHR0cDovL3ZtYXB4YmE5LmFkdmVudC5jb20vb2F1dGgvcmVzb3VyY2VzIiwiQVBYX0FQSSJdLCJjbGllbnRfaWQiOiJyby5hcHhhcGljbGllbnQiLCJyb2xlIjoiYXBpIiwic3ViIjoiZTAwMDE0NDgtZjc5Ny00NTYyLTk0NGUtNjBlNjZmNWQ3MDk3IiwiYXV0aF90aW1lIjoxNTc0MzE2ODQ1LCJpZHAiOiJsb2NhbCIsIm5hbWUiOiJhcGkiLCJlbWFpbCI6ImFwaUBhZHZlbnQuY29tIiwic2NvcGUiOlsiYXB4YXBpIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.Po5uTfJZkA3RKQjG40O1URl1yprFgDY-FRZyops0keSKDxXuR_g-RJQwAY6opUn1R8kckStHx5Wvyvp9FGxK70hCxBhH-1UojM5lUsOwa-5AnJbwbHZe7Rj8a5CAdaoWYgBx3UetkyjDyvt4W6-uwtBQROQrVt2O9Gk6Bnvr-wkcXLaQflKNZtFLZfeRqB_9z8xrqt9T43rVRig8FRWZNbnR4MGlkBVX6Px_cVYPs5WstZNrgWmCsk8rjNSsq-fTedvmzoAaxf9SDZ5jM1yA4u0j5S1CsEiLzfe819v5zppco2-ZvQSXgwGAq4kJSkSMJe1eAVwDCniq870ODi1d7A";
+
+            ApxWS.ContactQueryOptions queryOptions = new ApxWS.ContactQueryOptions();
+            ApxWS.ContactQueryResult queryResult;
+
+            ApxWS.Status status = apxws.Contact_GetAll(ref queryOptions, out queryResult);
         }
 
         private static void Sample_Contact(ApxWS.ApxWS apxWS)
@@ -277,13 +289,13 @@ namespace Advent.ApxSoap
 
             user._UpdatedFields.LoginName = true;
             user.LoginNameIsNull = false;
-            user.LoginName = random;
+            user.LoginName = "advent\\bxli";
 
             user._UpdatedFields.IsActive = true;
             user.IsActive = true;
 
             user._UpdatedFields.IsOSLogin = true;
-            user.IsOSLogin = false;
+            user.IsOSLogin = true;
             user.IsOSLoginIsNull = false;
 
             user._UpdatedFields.AccessAllUserGroups = true;
