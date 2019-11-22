@@ -3,29 +3,25 @@ namespace AdvOidcSample
 {
     using IdentityModel.Client;
     using IdentityModel.OidcClient;
+    using Newtonsoft.Json;
     using System;
     using System.Diagnostics;
     using System.Net;
     using System.Net.Http;
     using System.Net.Sockets;
 
-    public class AdvIdentityClient
+    public class AuthenticationConfiguration
     {
-        public string Issuer
-        {
-            get
-            {
-                if (this.discovery == null)
-                {
-                    return null;
-                }
+        public string Issuer;
+        public bool EnabledTokenBasedAuthentication;
+    }
 
-                return this.discovery.Issuer;
-            }
-            set
-            {
-                this.discovery = this.GetDiscoveryDocument(value);
-            }
+    public class ApxOidcClient
+    {
+        public string BaseAddress
+        {
+            get;
+            set;
         }
 
         public string ClientId
@@ -46,34 +42,57 @@ namespace AdvOidcSample
             set;
         }
 
-        private DiscoveryDocumentResponse discovery;
+        private DiscoveryDocumentResponse _disco;
 
-        private DiscoveryDocumentResponse GetDiscoveryDocument(string address)
+        private DiscoveryDocumentResponse Disco
         {
-            if (string.IsNullOrEmpty(address))
+            get
             {
-                throw new ArgumentNullException("address can't be null or empty.");
+                if (this._disco == null)
+                {
+                    this._disco = this.GetDiscoveryDocument();
+                }
+
+                return this._disco;
             }
+        }
+
+        private string GetIssuer()
+        {
+            Uri requestUri = null;
+            Uri baseUri = new Uri(this.BaseAddress);
+            string relativeUri = "apxlogin/api/well-known/authentication-configuration";
+            if (Uri.TryCreate(baseUri, relativeUri, out requestUri))
+            {
+                var client = new HttpClient();
+                var response = client.GetAsync(requestUri);
+                response.Wait();
+                var result = response.Result;
+                result.EnsureSuccessStatusCode();
+                var content = result.Content.ReadAsStringAsync().Result;
+                var config = JsonConvert.DeserializeObject<AuthenticationConfiguration>(content);
+                return config.Issuer;
+            }
+
+            return null;
+        }
+
+        private DiscoveryDocumentResponse GetDiscoveryDocument()
+        {
+            string issuer = this.GetIssuer();
 
             this.BypassSelfSignedCertificateValidationError();
 
-            //var client = new HttpClient();
-            //var response = client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
-            //{
-            //    Address = address,
-            //    Policy = { RequireHttps = false }
-            //});
-
-            var cache = new DiscoveryCache(address, new DiscoveryPolicy() { RequireHttps = false });
-            var response = cache.GetAsync();
-            response.Wait();
-            var disco = response.Result;
-            if (disco.IsError)
+            var client = new HttpClient();
+            var response = client.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
             {
-                throw new Exception(disco.Error);
-            }
+                Address = issuer,
+                Policy = { RequireHttps = false }
+            });
 
-            return disco;
+            response.Wait();
+            return response.Result;
+            
         }
 
         /// <summary>
@@ -82,14 +101,14 @@ namespace AdvOidcSample
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public TokenResponse Login(string username, string password)
+        public TokenResponse LoginPwd(string username, string password)
         {
             this.BypassSelfSignedCertificateValidationError();
 
             var client = new HttpClient();
             var response = client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
-                Address = this.discovery.TokenEndpoint,
+                Address = this.Disco.TokenEndpoint,
                 ClientId = this.ClientId,
                 ClientSecret = this.ClientSecret,
                 Scope = this.Scope,
@@ -105,7 +124,7 @@ namespace AdvOidcSample
         /// Login with Windows-NT User
         /// </summary>
         /// <returns></returns>
-        public TokenResponse Login()
+        public TokenResponse LoginNT()
         {
             this.BypassSelfSignedCertificateValidationError();
 
@@ -115,7 +134,7 @@ namespace AdvOidcSample
             var client = new HttpClient(handler);
             var response = client.RequestTokenAsync(new TokenRequest
             {
-                Address = this.discovery.TokenEndpoint,
+                Address = this.Disco.TokenEndpoint,
                 ClientId = this.ClientId,
                 ClientSecret = this.ClientSecret,
                 Parameters = {
@@ -125,7 +144,9 @@ namespace AdvOidcSample
             });
 
             response.Wait();
-            return response.Result;
+            var result = response.Result;
+            this.Print(result);
+            return result;
         }
 
         public TokenResponse RefreshToken(string refreshToken)
@@ -135,21 +156,23 @@ namespace AdvOidcSample
             var client = new HttpClient();
             var response = client.RequestRefreshTokenAsync(new  RefreshTokenRequest
             {
-                Address = this.discovery.TokenEndpoint,
+                Address = this.Disco.TokenEndpoint,
                 ClientId = this.ClientId,
                 ClientSecret = this.ClientSecret,
                 RefreshToken = refreshToken                
             });
 
             response.Wait();
-            return response.Result;
+            var result = response.Result;
+            this.Print(result);
+            return result;
         }
 
         /// <summary>
         /// Signin via Identity Server Login Page
         /// </summary>
         /// <returns></returns>
-        public LoginResult Signin()
+        public LoginResult LoginCode()
         {
             this.BypassSelfSignedCertificateValidationError();
 
@@ -161,7 +184,7 @@ namespace AdvOidcSample
 
             var options = new OidcClientOptions
             {
-                Authority = this.Issuer,
+                Authority = this.Disco.Issuer,
                 ClientId = this.ClientId,
                 Scope = this.Scope,
                 RedirectUri = redirectUri,
@@ -181,10 +204,13 @@ namespace AdvOidcSample
             lisener.Stop();
 
             var data = this.GetCallBackData(context.Result.Request);
-            var result = client.ProcessResponseAsync(data, state.Result);
-            result.Wait();
+            var response = client.ProcessResponseAsync(data, state.Result);
+            response.Wait();
 
-            return result.Result;
+            var result = response.Result;
+            this.Print(result);
+
+            return result;
         }
 
         private string GenerateRedirectUri()
@@ -233,6 +259,62 @@ namespace AdvOidcSample
         {
             // bypass self-signed Certificate error
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+        }
+
+        private void Print(TokenResponse reponse)
+        {
+            Console.WriteLine("==========Start Printing Token==========");
+            if (reponse == null)
+            {
+                Console.WriteLine("Object \"reponse\" is null.");
+            }
+            else if (reponse.IsError)
+            {
+                Console.WriteLine(reponse.ErrorDescription);
+            }
+            else
+            {
+                Console.WriteLine("IdentityToken");
+                Console.WriteLine(reponse.IdentityToken);
+                Console.WriteLine("========================================================");
+                Console.WriteLine("AccessToken");
+                Console.WriteLine(reponse.AccessToken);
+                Console.WriteLine("========================================================");
+                Console.WriteLine("RefreshToken");
+                Console.WriteLine(reponse.RefreshToken);
+            }
+
+            Console.WriteLine("==========End Printing Token==========");
+            //Console.WriteLine("Press Enter to continue.");
+            //Console.ReadLine();
+        }
+
+        private void Print(LoginResult result)
+        {
+            Console.WriteLine("=======================Begin=========================");
+            if (result == null)
+            {
+                Console.WriteLine("Object \"result\" is null.");
+            }
+            else if (result.IsError)
+            {
+                Console.WriteLine(result.Error);
+            }
+            else
+            {
+                Console.WriteLine("Id_Token:", result.IdentityToken);
+                Console.WriteLine(result.IdentityToken);
+                Console.WriteLine("================================================");
+                Console.WriteLine("Refresh_Token:", result.RefreshToken);
+                Console.WriteLine(result.RefreshToken);
+                Console.WriteLine("================================================");
+                Console.WriteLine("Access_Token:", result.AccessToken);
+                Console.WriteLine(result.AccessToken);
+            }
+
+            Console.WriteLine("=====================End===========================");
+            //Console.WriteLine("Press Enter to continue.");
+            //Console.ReadLine();
         }
     }
 }

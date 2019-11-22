@@ -1,0 +1,3052 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.advent.com/webservices/apx/v2" xmlns:s1="http://www.advent.com/api" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://www.advent.com/api/apx/v2" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.advent.com/webservices/apx/v2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Version 2 (Latest Version)</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.advent.com/webservices/apx/v2">
+      <s:import namespace="http://www.advent.com/api" />
+      <s:import namespace="http://www.advent.com/api/apx/v2" />
+      <s:element name="Activity_GetMetadata">
+        <s:complexType />
+      </s:element>
+      <s:element name="Activity_GetMetadataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:EntityDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_GetAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryOptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_GetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Activity_GetAllResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_GetByActivityGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sActivityGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_GetByActivityGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Activity_GetByActivityGUIDResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_GetByActivityGUIDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sActivityGUIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Activity_GetByActivityGUIDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Activity_GetByActivityGUIDListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_Put">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oActivity" type="s2:Activity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Activity_PutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Activity_PutResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ActivityPutResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Login">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LoginResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Logout">
+        <s:complexType />
+      </s:element>
+      <s:element name="LogoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="LogoutResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetMetadata">
+        <s:complexType />
+      </s:element>
+      <s:element name="Contact_GetMetadataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:EntityDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetAllResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sContactGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetByContactGUIDResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactGUIDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sContactGUIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactGUIDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetByContactGUIDListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sContactCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetByContactCodeResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactCodeList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sContactCodes" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByContactCodeListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetByContactCodeListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetByKeyResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_GetByKeyList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oKeys" type="tns:ArrayOfContactKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfContactKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactKey" nillable="true" type="s2:ContactKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Contact_GetByKeyListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_GetByKeyListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_Put">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oContact" type="s2:Contact" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Contact_PutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Contact_PutResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:ContactPutResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetMetadata">
+        <s:complexType />
+      </s:element>
+      <s:element name="User_GetMetadataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:EntityDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetAllResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByUserGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sUserGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByUserGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetByUserGUIDResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByUserGUIDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sUserGUIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByUserGUIDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetByUserGUIDListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByLoginName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByLoginNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetByLoginNameResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByLoginNameList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sLoginNames" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByLoginNameListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetByLoginNameListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetByKeyResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_GetByKeyList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oKeys" type="tns:ArrayOfUserKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserKey" nillable="true" type="s1:UserKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="User_GetByKeyListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_GetByKeyListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_Put">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oUser" type="s1:User" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="User_PutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="User_PutResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserPutResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetMetadata">
+        <s:complexType />
+      </s:element>
+      <s:element name="UserGroup_GetMetadataResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:EntityDefinition" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetAll">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetAllResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetAllResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sUserGroupGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetByUserGroupGUIDResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupGUIDList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sUserGroupGUIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupGUIDListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetByUserGroupGUIDListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sUserGroupCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetByUserGroupCodeResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupCodeList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="sUserGroupCodes" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByUserGroupCodeListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetByUserGroupCodeListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetByKeyResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_GetByKeyList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oKeys" type="tns:ArrayOfUserGroupKey" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfUserGroupKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserGroupKey" nillable="true" type="s1:UserGroupKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UserGroup_GetByKeyListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_GetByKeyListResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupQueryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_Put">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" name="oUserGroup" type="s1:UserGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserGroup_PutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserGroup_PutResult" type="s1:Status" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupPutOptions" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:UserGroupPutResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.advent.com/api">
+      <s:element name="EntityDefinition" type="s1:EntityDefinition" />
+      <s:complexType name="EntityDefinition">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="EntityTypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="InternalName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayNamePlural" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxRowsPerPut" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxRowsPerQuery" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="KeyList" type="s1:ArrayOfEntityKey" />
+          <s:element minOccurs="0" maxOccurs="1" name="FieldList" type="s1:ArrayOfField" />
+          <s:element minOccurs="0" maxOccurs="1" name="LookupLists" type="s1:ArrayOfLookpuList" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChildEntityList" type="s1:ArrayOfEntityDefinition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEntityKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Key" nillable="true" type="s1:EntityKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EntityKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FieldList" type="s1:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Tag" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Field" nillable="true" type="s1:Field" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Field">
+        <s:attribute name="Tag" type="s:string" />
+        <s:attribute name="Caption" type="s:string" />
+        <s:attribute name="BasicType" type="s1:BasicTypes" use="required" />
+        <s:attribute name="FieldLength" type="s:int" use="required" />
+        <s:attribute name="IsRequired" type="s:boolean" use="required" />
+        <s:attribute name="IsNullable" type="s:boolean" use="required" />
+        <s:attribute name="LookupListID" type="s:int" use="required" />
+      </s:complexType>
+      <s:simpleType name="BasicTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="NoData" />
+          <s:enumeration value="String" />
+          <s:enumeration value="Notes" />
+          <s:enumeration value="Numeric" />
+          <s:enumeration value="Float" />
+          <s:enumeration value="Date" />
+          <s:enumeration value="Time" />
+          <s:enumeration value="Bool" />
+          <s:enumeration value="Currency" />
+          <s:enumeration value="BoolWithBlank" />
+          <s:enumeration value="PositiveNumeric" />
+          <s:enumeration value="PositiveFloat" />
+          <s:enumeration value="StringWithInheritance" />
+          <s:enumeration value="UniqueIdentifier" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfLookpuList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LookupList" nillable="true" type="s1:LookpuList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LookpuList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LookupListItems" type="s1:ArrayOfLookupListItem" />
+        </s:sequence>
+        <s:attribute name="ListID" type="s:int" use="required" />
+        <s:attribute name="ListName" type="s:string" />
+      </s:complexType>
+      <s:complexType name="ArrayOfLookupListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LookupListItem" nillable="true" type="s1:LookupListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LookupListItem">
+        <s:attribute name="Value" type="s:string" />
+        <s:attribute name="Sequence" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfEntityDefinition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ChildEntity" nillable="true" type="s1:EntityDefinition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QueryOptionsBase" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Reserved" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Status">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StatusCode" type="s1:StatusCodes" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityStatusDetails" type="s1:EntityStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExceptionText" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Success" type="s:boolean" use="required" />
+        <s:attribute name="HasWarnings" type="s:boolean" use="required" />
+        <s:attribute name="HasEntityStatusDetails" type="s:boolean" use="required" />
+        <s:attribute name="ThrewException" type="s:boolean" use="required" />
+        <s:attribute name="QueryHasMoreData" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:simpleType name="StatusCodes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Success" />
+          <s:enumeration value="ExceptionThrown" />
+          <s:enumeration value="EntityErrors" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="EntityStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageList" type="s1:ArrayOfStatusMessage" />
+        </s:sequence>
+        <s:attribute name="HasErrors" type="s:boolean" use="required" />
+        <s:attribute name="HasOtherMessages" type="s:boolean" use="required" />
+        <s:attribute name="UndefinedCount" type="s:int" use="required" />
+        <s:attribute name="InformationCount" type="s:int" use="required" />
+        <s:attribute name="WarningCount" type="s:int" use="required" />
+        <s:attribute name="PrimaryOrForeignKeyErrorCount" type="s:int" use="required" />
+        <s:attribute name="DataTypeErrorCount" type="s:int" use="required" />
+        <s:attribute name="BusinessValidationErrorCount" type="s:int" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfStatusMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Message" nillable="true" type="s1:StatusMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StatusMessage">
+        <s:attribute name="EntityTypeID" type="s:int" use="required" />
+        <s:attribute name="RowIndex" type="s:int" use="required" />
+        <s:attribute name="MessageID" type="s:int" use="required" />
+        <s:attribute name="Severity" type="s1:Severity" use="required" />
+        <s:attribute name="Type" type="s1:MessageTypes" use="required" />
+        <s:attribute name="FieldTag" type="s:string" />
+        <s:attribute name="Message" type="s:string" />
+      </s:complexType>
+      <s:simpleType name="Severity">
+        <s:restriction base="s:string">
+          <s:enumeration value="Information" />
+          <s:enumeration value="Warning" />
+          <s:enumeration value="Error" />
+          <s:enumeration value="NeedsConfirmation" />
+          <s:enumeration value="Undefined" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="MessageTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="Undefined" />
+          <s:enumeration value="Information" />
+          <s:enumeration value="Warning" />
+          <s:enumeration value="DataTypeError" />
+          <s:enumeration value="PrimaryOrForeignKeyError" />
+          <s:enumeration value="BusinessValidationError" />
+          <s:enumeration value="NeedsConfirmation" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="QueryResultBase" />
+      <s:complexType name="EntityBase" abstract="true">
+        <s:attribute name="_DBAction" type="s1:DBAction" use="required" />
+      </s:complexType>
+      <s:simpleType name="DBAction">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Insert" />
+          <s:enumeration value="Update" />
+          <s:enumeration value="Delete" />
+          <s:enumeration value="Merge" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="TaskGroupMember">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:TaskGroupMemberUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="GroupGUID" type="s:string" />
+            <s:attribute name="MemberAssignedToUserName" type="s:string" />
+            <s:attribute name="MemberDescription" type="s:string" />
+            <s:attribute name="MemberDueDate" type="s:string" />
+            <s:attribute name="MemberDueDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="MemberGUID" type="s:string" />
+            <s:attribute name="MemberKey" type="s:int" use="required" />
+            <s:attribute name="MemberSequence" type="s:int" use="required" />
+            <s:attribute name="MemberStartDate" type="s:string" />
+            <s:attribute name="MemberStartDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="MemberStatus" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="TaskGroupMemberUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="GroupGUID" type="s:boolean" use="required" />
+            <s:attribute name="MemberAssignedToUserName" type="s:boolean" use="required" />
+            <s:attribute name="MemberDescription" type="s:boolean" use="required" />
+            <s:attribute name="MemberDueDate" type="s:boolean" use="required" />
+            <s:attribute name="MemberGUID" type="s:boolean" use="required" />
+            <s:attribute name="MemberKey" type="s:boolean" use="required" />
+            <s:attribute name="MemberSequence" type="s:boolean" use="required" />
+            <s:attribute name="MemberStartDate" type="s:boolean" use="required" />
+            <s:attribute name="MemberStatus" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="EntityUpdatedFieldsBase" />
+      <s:complexType name="ActivityPortfolioUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="ActivityGUID" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryPortfolio" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioCode" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioGUID" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActivityContactUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="ActivityGUID" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="ContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryContact" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActivityPortfolio">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:ActivityPortfolioUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="ActivityGUID" type="s:string" />
+            <s:attribute name="IsPrimaryPortfolio" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryPortfolioIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioCode" type="s:string" />
+            <s:attribute name="PortfolioGUID" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActivityContact">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:ActivityContactUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="ActivityGUID" type="s:string" />
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactGUID" type="s:string" />
+            <s:attribute name="IsPrimaryContact" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryContactIsNull" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PutOptionsBase" />
+      <s:complexType name="PutResultBase">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Messages" type="s1:ArrayOfStatusMessage1" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStatusMessage1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Messages" nillable="true" type="s1:StatusMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ContactAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:ContactAddressUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="AddrCustom01" type="s:string" />
+            <s:attribute name="AddrCustom02" type="s:string" />
+            <s:attribute name="AddrCustom03" type="s:string" />
+            <s:attribute name="AddrCustom04" type="s:string" />
+            <s:attribute name="AddressCity" type="s:string" />
+            <s:attribute name="AddressCountry" type="s:string" />
+            <s:attribute name="AddressGUID" type="s:string" />
+            <s:attribute name="AddressLabel" type="s:string" />
+            <s:attribute name="AddressLine1" type="s:string" />
+            <s:attribute name="AddressLine2" type="s:string" />
+            <s:attribute name="AddressLine3" type="s:string" />
+            <s:attribute name="AddressLine4" type="s:string" />
+            <s:attribute name="AddressState" type="s:string" />
+            <s:attribute name="AddressZip" type="s:string" />
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactGUID" type="s:string" />
+            <s:attribute name="DurationCode" type="s:string" />
+            <s:attribute name="DurationFrom" type="s:int" use="required" />
+            <s:attribute name="DurationTo" type="s:int" use="required" />
+            <s:attribute name="HasAttr01" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr02" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr03" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr04" type="s:boolean" use="required" />
+            <s:attribute name="IsDefaultAddress" type="s:boolean" use="required" />
+            <s:attribute name="IsDefaultAddressIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsSendExpress" type="s:boolean" use="required" />
+            <s:attribute name="IsSendMail" type="s:boolean" use="required" />
+            <s:attribute name="OwnerContactCode" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContactAddressUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="AddrCustom01" type="s:boolean" use="required" />
+            <s:attribute name="AddrCustom02" type="s:boolean" use="required" />
+            <s:attribute name="AddrCustom03" type="s:boolean" use="required" />
+            <s:attribute name="AddrCustom04" type="s:boolean" use="required" />
+            <s:attribute name="AddressCity" type="s:boolean" use="required" />
+            <s:attribute name="AddressCountry" type="s:boolean" use="required" />
+            <s:attribute name="AddressGUID" type="s:boolean" use="required" />
+            <s:attribute name="AddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="AddressLine1" type="s:boolean" use="required" />
+            <s:attribute name="AddressLine2" type="s:boolean" use="required" />
+            <s:attribute name="AddressLine3" type="s:boolean" use="required" />
+            <s:attribute name="AddressLine4" type="s:boolean" use="required" />
+            <s:attribute name="AddressState" type="s:boolean" use="required" />
+            <s:attribute name="AddressZip" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="ContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="DurationCode" type="s:boolean" use="required" />
+            <s:attribute name="DurationFrom" type="s:boolean" use="required" />
+            <s:attribute name="DurationTo" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr01" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr02" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr03" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr04" type="s:boolean" use="required" />
+            <s:attribute name="IsDefaultAddress" type="s:boolean" use="required" />
+            <s:attribute name="IsSendExpress" type="s:boolean" use="required" />
+            <s:attribute name="IsSendMail" type="s:boolean" use="required" />
+            <s:attribute name="OwnerContactCode" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContactPhone">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:ContactPhoneUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactGUID" type="s:string" />
+            <s:attribute name="IsDefaultPhone" type="s:boolean" use="required" />
+            <s:attribute name="IsDefaultPhoneIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Phone" type="s:string" />
+            <s:attribute name="PhoneCountryCode" type="s:int" use="required" />
+            <s:attribute name="PhoneExtension" type="s:string" />
+            <s:attribute name="PhoneGUID" type="s:string" />
+            <s:attribute name="PhoneLabel" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContactPhoneUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="ContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="IsDefaultPhone" type="s:boolean" use="required" />
+            <s:attribute name="Phone" type="s:boolean" use="required" />
+            <s:attribute name="PhoneCountryCode" type="s:boolean" use="required" />
+            <s:attribute name="PhoneExtension" type="s:boolean" use="required" />
+            <s:attribute name="PhoneGUID" type="s:boolean" use="required" />
+            <s:attribute name="PhoneLabel" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContactRelationship">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:ContactRelationshipUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactGUID" type="s:string" />
+            <s:attribute name="Custom01" type="s:string" />
+            <s:attribute name="Custom02" type="s:string" />
+            <s:attribute name="Custom03" type="s:string" />
+            <s:attribute name="Custom04" type="s:string" />
+            <s:attribute name="HasProfessionalAttr01" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr02" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr03" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr04" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr05" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr06" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr07" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr08" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr09" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr10" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr11" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr12" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr13" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr14" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr15" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr16" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr17" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr18" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr19" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr20" type="s:boolean" use="required" />
+            <s:attribute name="NatureOfReciprocalRelationship" type="s:string" />
+            <s:attribute name="NatureOfReciprocalRelationshipIsNull" type="s:boolean" use="required" />
+            <s:attribute name="NatureOfRelationship" type="s:string" />
+            <s:attribute name="Notes" type="s:string" />
+            <s:attribute name="RelatedContactCode" type="s:string" />
+            <s:attribute name="RelatedContactGUID" type="s:string" />
+            <s:attribute name="RelationshipGUID" type="s:string" />
+            <s:attribute name="RelationshipType" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ContactRelationshipUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="ContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="Custom01" type="s:boolean" use="required" />
+            <s:attribute name="Custom02" type="s:boolean" use="required" />
+            <s:attribute name="Custom03" type="s:boolean" use="required" />
+            <s:attribute name="Custom04" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr01" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr02" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr03" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr04" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr05" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr06" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr07" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr08" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr09" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr10" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr11" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr12" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr13" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr14" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr15" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr16" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr17" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr18" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr19" type="s:boolean" use="required" />
+            <s:attribute name="HasProfessionalAttr20" type="s:boolean" use="required" />
+            <s:attribute name="NatureOfReciprocalRelationship" type="s:boolean" use="required" />
+            <s:attribute name="NatureOfRelationship" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:boolean" use="required" />
+            <s:attribute name="RelatedContactCode" type="s:boolean" use="required" />
+            <s:attribute name="RelatedContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="RelationshipGUID" type="s:boolean" use="required" />
+            <s:attribute name="RelationshipType" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="InterestedParty">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:InterestedPartyUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="BankingAddressLabel" type="s:string" />
+            <s:attribute name="BankingAddressLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="BankingPhoneLabel" type="s:string" />
+            <s:attribute name="BankingPhoneLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="BillingAddressLabel" type="s:string" />
+            <s:attribute name="BillingAddressLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="BillingPhoneLabel" type="s:string" />
+            <s:attribute name="BillingPhoneLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactGUID" type="s:string" />
+            <s:attribute name="Custom01" type="s:string" />
+            <s:attribute name="Custom02" type="s:string" />
+            <s:attribute name="Custom03" type="s:string" />
+            <s:attribute name="Custom04" type="s:string" />
+            <s:attribute name="DecisionMakerAddressLabel" type="s:string" />
+            <s:attribute name="DecisionMakerAddressLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="DecisionMakerPhoneLabel" type="s:string" />
+            <s:attribute name="DecisionMakerPhoneLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ExternalAccount" type="s:string" />
+            <s:attribute name="HasAttr01" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr02" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr03" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr04" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr05" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr06" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr07" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr08" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr09" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr10" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr11" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr12" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr13" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr14" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr15" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr16" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr17" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr18" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr19" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr20" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr21" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr22" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr23" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr24" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr25" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr26" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr27" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr28" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr29" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr30" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr31" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr32" type="s:boolean" use="required" />
+            <s:attribute name="InterestedPartyType" type="s:string" />
+            <s:attribute name="InterestedPartyTypeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsBankContact" type="s:boolean" use="required" />
+            <s:attribute name="IsBankContactIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsBillingContact" type="s:boolean" use="required" />
+            <s:attribute name="IsBillingContactIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsDecisionMaker" type="s:boolean" use="required" />
+            <s:attribute name="IsDecisionMakerIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsJointOwner" type="s:boolean" use="required" />
+            <s:attribute name="IsJointOwnerIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsOwner" type="s:boolean" use="required" />
+            <s:attribute name="IsOwnerIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryContact" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryContactIsNull" type="s:boolean" use="required" />
+            <s:attribute name="JointOwnerAddressLabel" type="s:string" />
+            <s:attribute name="JointOwnerAddressLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="JointOwnerPhoneLabel" type="s:string" />
+            <s:attribute name="JointOwnerPhoneLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:string" />
+            <s:attribute name="OwnerAddressLabel" type="s:string" />
+            <s:attribute name="OwnerAddressLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="OwnerPhoneLabel" type="s:string" />
+            <s:attribute name="OwnerPhoneLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioCode" type="s:string" />
+            <s:attribute name="PortfolioBaseType" type="s:string" />
+            <s:attribute name="PortfolioGUID" type="s:string" />
+            <s:attribute name="PrimaryContactAddressLabel" type="s:string" />
+            <s:attribute name="PrimaryContactAddressLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactPhoneLabel" type="s:string" />
+            <s:attribute name="PrimaryContactPhoneLabelIsNull" type="s:boolean" use="required" />
+            <s:attribute name="RelatedContactCode" type="s:string" />
+            <s:attribute name="RelatedContactCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="RelatedContactGUID" type="s:string" />
+            <s:attribute name="RelatedContactGUIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="RelationshipGUID" type="s:string" />
+            <s:attribute name="RelationshipGUIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="RelationshipType" type="s:string" />
+            <s:attribute name="RelationshipTypeIsNull" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="InterestedPartyUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="BankingAddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="BankingPhoneLabel" type="s:boolean" use="required" />
+            <s:attribute name="BillingAddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="BillingPhoneLabel" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="ContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="Custom01" type="s:boolean" use="required" />
+            <s:attribute name="Custom02" type="s:boolean" use="required" />
+            <s:attribute name="Custom03" type="s:boolean" use="required" />
+            <s:attribute name="Custom04" type="s:boolean" use="required" />
+            <s:attribute name="DecisionMakerAddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="DecisionMakerPhoneLabel" type="s:boolean" use="required" />
+            <s:attribute name="ExternalAccount" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr01" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr02" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr03" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr04" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr05" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr06" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr07" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr08" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr09" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr10" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr11" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr12" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr13" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr14" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr15" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr16" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr17" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr18" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr19" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr20" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr21" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr22" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr23" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr24" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr25" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr26" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr27" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr28" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr29" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr30" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr31" type="s:boolean" use="required" />
+            <s:attribute name="HasAttr32" type="s:boolean" use="required" />
+            <s:attribute name="InterestedPartyType" type="s:boolean" use="required" />
+            <s:attribute name="IsBankContact" type="s:boolean" use="required" />
+            <s:attribute name="IsBillingContact" type="s:boolean" use="required" />
+            <s:attribute name="IsDecisionMaker" type="s:boolean" use="required" />
+            <s:attribute name="IsJointOwner" type="s:boolean" use="required" />
+            <s:attribute name="IsOwner" type="s:boolean" use="required" />
+            <s:attribute name="IsPrimaryContact" type="s:boolean" use="required" />
+            <s:attribute name="JointOwnerAddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="JointOwnerPhoneLabel" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:boolean" use="required" />
+            <s:attribute name="OwnerAddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="OwnerPhoneLabel" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioCode" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioBaseType" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioGUID" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactAddressLabel" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactPhoneLabel" type="s:boolean" use="required" />
+            <s:attribute name="RelatedContactCode" type="s:boolean" use="required" />
+            <s:attribute name="RelatedContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="RelationshipGUID" type="s:boolean" use="required" />
+            <s:attribute name="RelationshipType" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserQueryOptions" type="s1:UserQueryOptions" />
+      <s:complexType name="UserQueryOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryOptionsBase">
+            <s:attribute name="IncludeUserGroupMemberList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserQueryResult" type="s1:UserQueryResult" />
+      <s:complexType name="UserQueryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserList" type="s1:ArrayOfUser" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="User" nillable="true" type="s1:User" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="User">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserGroupMemberList" type="s1:ArrayOfUserGroupMember" />
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:UserUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="AccessAllUserGroups" type="s:boolean" use="required" />
+            <s:attribute name="AccessAllUsersRoleID" type="s:string" />
+            <s:attribute name="AccessAllUsersRoleIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="AllowMultipleSessionsPerLogin" type="s:string" />
+            <s:attribute name="AllowMultipleSessionsPerLoginIsNull" type="s:boolean" use="required" />
+            <s:attribute name="CanAccessAllUsersPrivateData" type="s:boolean" use="required" />
+            <s:attribute name="CanAccessAllUsersPrivateDataIsNull" type="s:boolean" use="required" />
+            <s:attribute name="DefaultRoleID" type="s:string" />
+            <s:attribute name="EmailAddress" type="s:string" />
+            <s:attribute name="EmailAddressIsNull" type="s:boolean" use="required" />
+            <s:attribute name="FailedLoginCount" type="s:int" use="required" />
+            <s:attribute name="FirstName" type="s:string" />
+            <s:attribute name="FirstNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsActive" type="s:boolean" use="required" />
+            <s:attribute name="IsEditable" type="s:boolean" use="required" />
+            <s:attribute name="IsEditableIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsHidden" type="s:boolean" use="required" />
+            <s:attribute name="IsOSLogin" type="s:boolean" use="required" />
+            <s:attribute name="IsOSLoginIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsPasswordChangeRequired" type="s:boolean" use="required" />
+            <s:attribute name="IsSystem" type="s:boolean" use="required" />
+            <s:attribute name="LastActivityDate" type="s:string" />
+            <s:attribute name="LastActivityDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="LastLoginDate" type="s:string" />
+            <s:attribute name="LastLoginDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="LastName" type="s:string" />
+            <s:attribute name="LastNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="LastPasswordChangeDate" type="s:string" />
+            <s:attribute name="LastPasswordChangeDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="LoginName" type="s:string" />
+            <s:attribute name="LoginNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="MiddleName" type="s:string" />
+            <s:attribute name="MiddleNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Name" type="s:string" />
+            <s:attribute name="OldPassword" type="s:string" />
+            <s:attribute name="OldPasswordIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Password" type="s:string" />
+            <s:attribute name="PasswordIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PasswordExpirationDate" type="s:string" />
+            <s:attribute name="PasswordExpirationDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PasswordFailureLockout" type="s:boolean" use="required" />
+            <s:attribute name="PasswordFailureLockoutIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PrivateDataRoleId" type="s:string" />
+            <s:attribute name="PrivateDataRoleIdIsNull" type="s:boolean" use="required" />
+            <s:attribute name="UserGUID" type="s:string" />
+            <s:attribute name="_IncludesUserGroupMemberList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserGroupMember">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserGroupMember" nillable="true" type="s1:UserGroupMember" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserGroupMember">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:UserGroupMemberUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="RoleID" type="s:string" />
+            <s:attribute name="UserGroupCode" type="s:string" />
+            <s:attribute name="UserGroupGUID" type="s:string" />
+            <s:attribute name="UserGUID" type="s:string" />
+            <s:attribute name="UserLoginName" type="s:string" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserGroupMemberUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="RoleID" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupCode" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupGUID" type="s:boolean" use="required" />
+            <s:attribute name="UserGUID" type="s:boolean" use="required" />
+            <s:attribute name="UserLoginName" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="AccessAllUserGroups" type="s:boolean" use="required" />
+            <s:attribute name="AccessAllUsersRoleID" type="s:boolean" use="required" />
+            <s:attribute name="AllowMultipleSessionsPerLogin" type="s:boolean" use="required" />
+            <s:attribute name="CanAccessAllUsersPrivateData" type="s:boolean" use="required" />
+            <s:attribute name="DefaultRoleID" type="s:boolean" use="required" />
+            <s:attribute name="EmailAddress" type="s:boolean" use="required" />
+            <s:attribute name="FailedLoginCount" type="s:boolean" use="required" />
+            <s:attribute name="FirstName" type="s:boolean" use="required" />
+            <s:attribute name="IsActive" type="s:boolean" use="required" />
+            <s:attribute name="IsEditable" type="s:boolean" use="required" />
+            <s:attribute name="IsHidden" type="s:boolean" use="required" />
+            <s:attribute name="IsOSLogin" type="s:boolean" use="required" />
+            <s:attribute name="IsPasswordChangeRequired" type="s:boolean" use="required" />
+            <s:attribute name="IsSystem" type="s:boolean" use="required" />
+            <s:attribute name="LastActivityDate" type="s:boolean" use="required" />
+            <s:attribute name="LastLoginDate" type="s:boolean" use="required" />
+            <s:attribute name="LastName" type="s:boolean" use="required" />
+            <s:attribute name="LastPasswordChangeDate" type="s:boolean" use="required" />
+            <s:attribute name="LoginName" type="s:boolean" use="required" />
+            <s:attribute name="MiddleName" type="s:boolean" use="required" />
+            <s:attribute name="Name" type="s:boolean" use="required" />
+            <s:attribute name="OldPassword" type="s:boolean" use="required" />
+            <s:attribute name="Password" type="s:boolean" use="required" />
+            <s:attribute name="PasswordExpirationDate" type="s:boolean" use="required" />
+            <s:attribute name="PasswordFailureLockout" type="s:boolean" use="required" />
+            <s:attribute name="PrivateDataRoleId" type="s:boolean" use="required" />
+            <s:attribute name="UserGUID" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserKey" type="s1:UserKey" />
+      <s:complexType name="UserKey">
+        <s:attribute name="UserGUID" type="s:string" />
+        <s:attribute name="LoginName" type="s:string" />
+      </s:complexType>
+      <s:element name="UserPutOptions" type="s1:UserPutOptions" />
+      <s:complexType name="UserPutOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutOptionsBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserPutResult" type="s1:UserPutResult" />
+      <s:complexType name="UserPutResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserRowKeyList" type="s1:ArrayOfUserRowKey" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserRowKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserRowKey" nillable="true" type="s1:UserRowKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserRowKey">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:UserKey">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="RowIndex" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserGroupQueryOptions" type="s1:UserGroupQueryOptions" />
+      <s:complexType name="UserGroupQueryOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryOptionsBase">
+            <s:attribute name="IncludeUserGroupMemberList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserGroupQueryResult" type="s1:UserGroupQueryResult" />
+      <s:complexType name="UserGroupQueryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserGroupList" type="s1:ArrayOfUserGroup" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserGroup" nillable="true" type="s1:UserGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserGroup">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserGroupMemberList" type="s1:ArrayOfUserGroupMember" />
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s1:UserGroupUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="GroupTypeID" type="s:string" />
+            <s:attribute name="IsHidden" type="s:boolean" use="required" />
+            <s:attribute name="IsProcessingGroup" type="s:boolean" use="required" />
+            <s:attribute name="IsSystem" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupCode" type="s:string" />
+            <s:attribute name="UserGroupDescription" type="s:string" />
+            <s:attribute name="UserGroupGUID" type="s:string" />
+            <s:attribute name="UserGroupName" type="s:string" />
+            <s:attribute name="_IncludesUserGroupMemberList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="UserGroupUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="GroupTypeID" type="s:boolean" use="required" />
+            <s:attribute name="IsHidden" type="s:boolean" use="required" />
+            <s:attribute name="IsProcessingGroup" type="s:boolean" use="required" />
+            <s:attribute name="IsSystem" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupCode" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupDescription" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupGUID" type="s:boolean" use="required" />
+            <s:attribute name="UserGroupName" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserGroupKey" type="s1:UserGroupKey" />
+      <s:complexType name="UserGroupKey">
+        <s:attribute name="UserGroupGUID" type="s:string" />
+        <s:attribute name="UserGroupCode" type="s:string" />
+      </s:complexType>
+      <s:element name="UserGroupPutOptions" type="s1:UserGroupPutOptions" />
+      <s:complexType name="UserGroupPutOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutOptionsBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UserGroupPutResult" type="s1:UserGroupPutResult" />
+      <s:complexType name="UserGroupPutResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="UserGroupRowKeyList" type="s1:ArrayOfUserGroupRowKey" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserGroupRowKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserGroupRowKey" nillable="true" type="s1:UserGroupRowKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserGroupRowKey">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:UserGroupKey">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="RowIndex" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.advent.com/api/apx/v2">
+      <s:import namespace="http://www.advent.com/api" />
+      <s:element name="ActivityQueryOptions" type="s2:ActivityQueryOptions" />
+      <s:complexType name="ActivityQueryOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryOptionsBase">
+            <s:attribute name="IncludeActivityContactList" type="s:boolean" use="required" />
+            <s:attribute name="IncludeActivityPortfolioList" type="s:boolean" use="required" />
+            <s:attribute name="IncludeTaskGroupMemberList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ActivityQueryResult" type="s2:ActivityQueryResult" />
+      <s:complexType name="ActivityQueryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ActivityList" type="s2:ArrayOfActivity" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfActivity">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Activity" nillable="true" type="s2:Activity" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Activity">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ActivityContactList" type="s2:ArrayOfActivityContact" />
+              <s:element minOccurs="0" maxOccurs="1" name="ActivityPortfolioList" type="s2:ArrayOfActivityPortfolio" />
+              <s:element minOccurs="0" maxOccurs="1" name="TaskGroupMemberList" type="s2:ArrayOfTaskGroupMember" />
+              <s:element minOccurs="0" maxOccurs="1" name="ActivityCustomFields" type="s2:ArrayOfApiCustomField" />
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s2:ActivityUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="ActivityGUID" type="s:string" />
+            <s:attribute name="ActivityKey" type="s:int" use="required" />
+            <s:attribute name="ActivityStatus" type="s:string" />
+            <s:attribute name="ActivityStatusIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ActivityTypeID" type="s:string" />
+            <s:attribute name="AssignedByUserCode" type="s:string" />
+            <s:attribute name="AssignedByUserCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="AssignedDate" type="s:string" />
+            <s:attribute name="AssignedDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="AssignedToUserCode" type="s:string" />
+            <s:attribute name="AssignedToUserCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Category" type="s:string" />
+            <s:attribute name="CompletedDate" type="s:string" />
+            <s:attribute name="CompletedDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="CreatedByUserCode" type="s:string" />
+            <s:attribute name="CreatedByUserCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="CreatedDate" type="s:string" />
+            <s:attribute name="Description" type="s:string" />
+            <s:attribute name="DocumentLink" type="s:string" />
+            <s:attribute name="DueDate" type="s:string" />
+            <s:attribute name="DueDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailBodyText" type="s:string" />
+            <s:attribute name="EmailBodyTextIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailReceivedTime" type="s:string" />
+            <s:attribute name="EmailReceivedTimeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailRecipientListBCC" type="s:string" />
+            <s:attribute name="EmailRecipientListBCCIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailRecipientListCC" type="s:string" />
+            <s:attribute name="EmailRecipientListCCIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailRecipientListTo" type="s:string" />
+            <s:attribute name="EmailRecipientListToIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailSenderAddress" type="s:string" />
+            <s:attribute name="EmailSenderAddressIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailSentTime" type="s:string" />
+            <s:attribute name="EmailSentTimeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EmailSubject" type="s:string" />
+            <s:attribute name="EmailSubjectIsNull" type="s:boolean" use="required" />
+            <s:attribute name="EndDate" type="s:string" />
+            <s:attribute name="EndDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsAllDay" type="s:boolean" use="required" />
+            <s:attribute name="IsAllDayIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsRecurring" type="s:boolean" use="required" />
+            <s:attribute name="IsRecurringIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsReminderOn" type="s:boolean" use="required" />
+            <s:attribute name="IsReminderOnIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Location" type="s:string" />
+            <s:attribute name="LocationIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:string" />
+            <s:attribute name="NotesIsNull" type="s:boolean" use="required" />
+            <s:attribute name="OwnerCode" type="s:string" />
+            <s:attribute name="OwnerCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PercentComplete" type="s:int" use="required" />
+            <s:attribute name="PercentCompleteIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioCode" type="s:string" />
+            <s:attribute name="PortfolioCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Priority" type="s:string" />
+            <s:attribute name="ReminderDate" type="s:string" />
+            <s:attribute name="ReminderDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ReminderDuration" type="s:string" />
+            <s:attribute name="ReminderDurationIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ReminderTime" type="s:string" />
+            <s:attribute name="ReminderTimeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="SecondaryAssignedByUserCode" type="s:string" />
+            <s:attribute name="SecondaryAssignedByUserCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="SecondaryAssignedDate" type="s:string" />
+            <s:attribute name="SecondaryAssignedDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="SecondaryAssignedToUserCode" type="s:string" />
+            <s:attribute name="SecondaryAssignedToUserCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ShowTimeAs" type="s:string" />
+            <s:attribute name="ShowTimeAsIsNull" type="s:boolean" use="required" />
+            <s:attribute name="StartDate" type="s:string" />
+            <s:attribute name="StartDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="URL" type="s:string" />
+            <s:attribute name="_IncludesActivityContactList" type="s:boolean" use="required" />
+            <s:attribute name="_IncludesActivityPortfolioList" type="s:boolean" use="required" />
+            <s:attribute name="_IncludesTaskGroupMemberList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActivityUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="ActivityGUID" type="s:boolean" use="required" />
+            <s:attribute name="ActivityKey" type="s:boolean" use="required" />
+            <s:attribute name="ActivityStatus" type="s:boolean" use="required" />
+            <s:attribute name="ActivityTypeID" type="s:boolean" use="required" />
+            <s:attribute name="AssignedByUserCode" type="s:boolean" use="required" />
+            <s:attribute name="AssignedDate" type="s:boolean" use="required" />
+            <s:attribute name="AssignedToUserCode" type="s:boolean" use="required" />
+            <s:attribute name="Category" type="s:boolean" use="required" />
+            <s:attribute name="CompletedDate" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="CreatedByUserCode" type="s:boolean" use="required" />
+            <s:attribute name="CreatedDate" type="s:boolean" use="required" />
+            <s:attribute name="Description" type="s:boolean" use="required" />
+            <s:attribute name="DocumentLink" type="s:boolean" use="required" />
+            <s:attribute name="DueDate" type="s:boolean" use="required" />
+            <s:attribute name="EmailBodyText" type="s:boolean" use="required" />
+            <s:attribute name="EmailReceivedTime" type="s:boolean" use="required" />
+            <s:attribute name="EmailRecipientListBCC" type="s:boolean" use="required" />
+            <s:attribute name="EmailRecipientListCC" type="s:boolean" use="required" />
+            <s:attribute name="EmailRecipientListTo" type="s:boolean" use="required" />
+            <s:attribute name="EmailSenderAddress" type="s:boolean" use="required" />
+            <s:attribute name="EmailSentTime" type="s:boolean" use="required" />
+            <s:attribute name="EmailSubject" type="s:boolean" use="required" />
+            <s:attribute name="EndDate" type="s:boolean" use="required" />
+            <s:attribute name="IsAllDay" type="s:boolean" use="required" />
+            <s:attribute name="IsRecurring" type="s:boolean" use="required" />
+            <s:attribute name="IsReminderOn" type="s:boolean" use="required" />
+            <s:attribute name="Location" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:boolean" use="required" />
+            <s:attribute name="OwnerCode" type="s:boolean" use="required" />
+            <s:attribute name="PercentComplete" type="s:boolean" use="required" />
+            <s:attribute name="PortfolioCode" type="s:boolean" use="required" />
+            <s:attribute name="Priority" type="s:boolean" use="required" />
+            <s:attribute name="ReminderDate" type="s:boolean" use="required" />
+            <s:attribute name="ReminderDuration" type="s:boolean" use="required" />
+            <s:attribute name="ReminderTime" type="s:boolean" use="required" />
+            <s:attribute name="SecondaryAssignedByUserCode" type="s:boolean" use="required" />
+            <s:attribute name="SecondaryAssignedDate" type="s:boolean" use="required" />
+            <s:attribute name="SecondaryAssignedToUserCode" type="s:boolean" use="required" />
+            <s:attribute name="ShowTimeAs" type="s:boolean" use="required" />
+            <s:attribute name="StartDate" type="s:boolean" use="required" />
+            <s:attribute name="URL" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfActivityContact">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActivityContact" nillable="true" type="s1:ActivityContact" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfActivityPortfolio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActivityPortfolio" nillable="true" type="s1:ActivityPortfolio" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTaskGroupMember">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TaskGroupMember" nillable="true" type="s1:TaskGroupMember" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfApiCustomField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActivityCustomFields" nillable="true" type="s2:ApiCustomField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ApiCustomField">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Tag" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValueIsNull" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdatedField" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ActivityPutOptions" type="s2:ActivityPutOptions" />
+      <s:complexType name="ActivityPutOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutOptionsBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ActivityPutResult" type="s2:ActivityPutResult" />
+      <s:complexType name="ActivityPutResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ActivityRowKeyList" type="s2:ArrayOfActivityRowKey" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfActivityRowKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActivityRowKey" nillable="true" type="s2:ActivityRowKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActivityRowKey">
+        <s:complexContent mixed="false">
+          <s:extension base="s2:ActivityKey">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="RowIndex" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ActivityKey">
+        <s:attribute name="ActivityGUID" type="s:string" />
+      </s:complexType>
+      <s:element name="ContactQueryOptions" type="s2:ContactQueryOptions" />
+      <s:complexType name="ContactQueryOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryOptionsBase">
+            <s:attribute name="IncludeContactAddressList" type="s:boolean" use="required" />
+            <s:attribute name="IncludeContactPhoneList" type="s:boolean" use="required" />
+            <s:attribute name="IncludeContactRelationshipList" type="s:boolean" use="required" />
+            <s:attribute name="IncludeInterestedPartyList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ContactQueryResult" type="s2:ContactQueryResult" />
+      <s:complexType name="ContactQueryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:QueryResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ContactList" type="s2:ArrayOfContact" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfContact">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Contact" nillable="true" type="s2:Contact" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Contact">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ContactAddressList" type="s2:ArrayOfContactAddress" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneList" type="s2:ArrayOfContactPhone" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactRelationshipList" type="s2:ArrayOfContactRelationship" />
+              <s:element minOccurs="0" maxOccurs="1" name="InterestedPartyList" type="s2:ArrayOfInterestedParty" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactCustomFields" type="s2:ArrayOfApiCustomField1" />
+              <s:element minOccurs="0" maxOccurs="1" name="_UpdatedFields" type="s2:ContactUpdatedFields" />
+            </s:sequence>
+            <s:attribute name="BestTimeToCall" type="s:string" />
+            <s:attribute name="BestTimeToCallIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Birthdate" type="s:string" />
+            <s:attribute name="BirthdateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="CallInterval" type="s:int" use="required" />
+            <s:attribute name="CallIntervalIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Company" type="s:string" />
+            <s:attribute name="CompanyIsNull" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:string" />
+            <s:attribute name="ContactGUID" type="s:string" />
+            <s:attribute name="ContactName" type="s:string" />
+            <s:attribute name="ContactType" type="s:string" />
+            <s:attribute name="DeliveryName" type="s:string" />
+            <s:attribute name="DriversLicense" type="s:string" />
+            <s:attribute name="DriversLicenseIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Email" type="s:string" />
+            <s:attribute name="EmailIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Email2" type="s:string" />
+            <s:attribute name="Email2IsNull" type="s:boolean" use="required" />
+            <s:attribute name="Email3" type="s:string" />
+            <s:attribute name="Email3IsNull" type="s:boolean" use="required" />
+            <s:attribute name="FirstName" type="s:string" />
+            <s:attribute name="FirstNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Folder" type="s:string" />
+            <s:attribute name="Gender" type="s:string" />
+            <s:attribute name="GenderIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Income" type="s:double" use="required" />
+            <s:attribute name="IncomeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsBusnOwner" type="s:boolean" use="required" />
+            <s:attribute name="IsBusnOwnerIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsIRA" type="s:boolean" use="required" />
+            <s:attribute name="IsIRAIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsLifeInsurance" type="s:boolean" use="required" />
+            <s:attribute name="IsLifeInsuranceIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsOnSyncList" type="s:boolean" use="required" />
+            <s:attribute name="IsOnSyncListIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsOwnedByUser" type="s:boolean" use="required" />
+            <s:attribute name="IsOwnedByUserIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsReferralRequest" type="s:boolean" use="required" />
+            <s:attribute name="IsReferralRequestIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsRetired" type="s:boolean" use="required" />
+            <s:attribute name="IsRetiredIsNull" type="s:boolean" use="required" />
+            <s:attribute name="IsTrustFund" type="s:boolean" use="required" />
+            <s:attribute name="IsTrustFundIsNull" type="s:boolean" use="required" />
+            <s:attribute name="LastContactedDate" type="s:string" />
+            <s:attribute name="LastContactedDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="LastName" type="s:string" />
+            <s:attribute name="LastNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="MiddleName" type="s:string" />
+            <s:attribute name="MiddleNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="MiFIDLegalEntityID" type="s:string" />
+            <s:attribute name="MiFIDLegalEntityIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="MiFIDNationalID" type="s:string" />
+            <s:attribute name="MiFIDNationalIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="NationalIDTypeCode" type="s:string" />
+            <s:attribute name="NationalIDTypeCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="NationalityCountryCode" type="s:string" />
+            <s:attribute name="NationalityCountryCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="NextCallDate" type="s:string" />
+            <s:attribute name="NextCallDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:string" />
+            <s:attribute name="NotesIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Occupation" type="s:string" />
+            <s:attribute name="OccupationIsNull" type="s:boolean" use="required" />
+            <s:attribute name="OwnerCode" type="s:string" />
+            <s:attribute name="Prefix" type="s:string" />
+            <s:attribute name="PrefixIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactCode" type="s:string" />
+            <s:attribute name="PrimaryContactCodeIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactGUID" type="s:string" />
+            <s:attribute name="PrimaryContactGUIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactName" type="s:string" />
+            <s:attribute name="PrimaryContactNameIsNull" type="s:boolean" use="required" />
+            <s:attribute name="RetirementDate" type="s:string" />
+            <s:attribute name="RetirementDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Salutation" type="s:string" />
+            <s:attribute name="Status" type="s:string" />
+            <s:attribute name="InactiveDate" type="s:string" />
+            <s:attribute name="InactiveDateIsNull" type="s:boolean" use="required" />
+            <s:attribute name="Suffix" type="s:string" />
+            <s:attribute name="SuffixIsNull" type="s:boolean" use="required" />
+            <s:attribute name="TaxBracket" type="s:int" use="required" />
+            <s:attribute name="TaxBracketIsNull" type="s:boolean" use="required" />
+            <s:attribute name="TaxNumber" type="s:string" />
+            <s:attribute name="Title" type="s:string" />
+            <s:attribute name="TitleIsNull" type="s:boolean" use="required" />
+            <s:attribute name="URL" type="s:string" />
+            <s:attribute name="_IncludesContactAddressList" type="s:boolean" use="required" />
+            <s:attribute name="_IncludesContactPhoneList" type="s:boolean" use="required" />
+            <s:attribute name="_IncludesContactRelationshipList" type="s:boolean" use="required" />
+            <s:attribute name="_IncludesInterestedPartyList" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfContactAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactAddress" nillable="true" type="s1:ContactAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContactPhone">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactPhone" nillable="true" type="s1:ContactPhone" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContactRelationship">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactRelationship" nillable="true" type="s1:ContactRelationship" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInterestedParty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InterestedParty" nillable="true" type="s1:InterestedParty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfApiCustomField1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactCustomFields" nillable="true" type="s2:ApiCustomField" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ContactUpdatedFields">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:EntityUpdatedFieldsBase">
+            <s:attribute name="BestTimeToCall" type="s:boolean" use="required" />
+            <s:attribute name="Birthdate" type="s:boolean" use="required" />
+            <s:attribute name="CallInterval" type="s:boolean" use="required" />
+            <s:attribute name="Company" type="s:boolean" use="required" />
+            <s:attribute name="ContactCode" type="s:boolean" use="required" />
+            <s:attribute name="ContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="ContactName" type="s:boolean" use="required" />
+            <s:attribute name="ContactType" type="s:boolean" use="required" />
+            <s:attribute name="DeliveryName" type="s:boolean" use="required" />
+            <s:attribute name="DriversLicense" type="s:boolean" use="required" />
+            <s:attribute name="Email" type="s:boolean" use="required" />
+            <s:attribute name="Email2" type="s:boolean" use="required" />
+            <s:attribute name="Email3" type="s:boolean" use="required" />
+            <s:attribute name="FirstName" type="s:boolean" use="required" />
+            <s:attribute name="Folder" type="s:boolean" use="required" />
+            <s:attribute name="Gender" type="s:boolean" use="required" />
+            <s:attribute name="Income" type="s:boolean" use="required" />
+            <s:attribute name="IsBusnOwner" type="s:boolean" use="required" />
+            <s:attribute name="IsIRA" type="s:boolean" use="required" />
+            <s:attribute name="IsLifeInsurance" type="s:boolean" use="required" />
+            <s:attribute name="IsOnSyncList" type="s:boolean" use="required" />
+            <s:attribute name="IsOwnedByUser" type="s:boolean" use="required" />
+            <s:attribute name="IsReferralRequest" type="s:boolean" use="required" />
+            <s:attribute name="IsRetired" type="s:boolean" use="required" />
+            <s:attribute name="IsTrustFund" type="s:boolean" use="required" />
+            <s:attribute name="LastContactedDate" type="s:boolean" use="required" />
+            <s:attribute name="LastName" type="s:boolean" use="required" />
+            <s:attribute name="MiddleName" type="s:boolean" use="required" />
+            <s:attribute name="MiFIDLegalEntityID" type="s:boolean" use="required" />
+            <s:attribute name="MiFIDNationalID" type="s:boolean" use="required" />
+            <s:attribute name="NationalIDTypeCode" type="s:boolean" use="required" />
+            <s:attribute name="NationalityCountryCode" type="s:boolean" use="required" />
+            <s:attribute name="NextCallDate" type="s:boolean" use="required" />
+            <s:attribute name="Notes" type="s:boolean" use="required" />
+            <s:attribute name="Occupation" type="s:boolean" use="required" />
+            <s:attribute name="OwnerCode" type="s:boolean" use="required" />
+            <s:attribute name="Prefix" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactCode" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactGUID" type="s:boolean" use="required" />
+            <s:attribute name="PrimaryContactName" type="s:boolean" use="required" />
+            <s:attribute name="RetirementDate" type="s:boolean" use="required" />
+            <s:attribute name="Salutation" type="s:boolean" use="required" />
+            <s:attribute name="Status" type="s:boolean" use="required" />
+            <s:attribute name="InactiveDate" type="s:boolean" use="required" />
+            <s:attribute name="Suffix" type="s:boolean" use="required" />
+            <s:attribute name="TaxBracket" type="s:boolean" use="required" />
+            <s:attribute name="TaxNumber" type="s:boolean" use="required" />
+            <s:attribute name="Title" type="s:boolean" use="required" />
+            <s:attribute name="URL" type="s:boolean" use="required" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ContactKey" type="s2:ContactKey" />
+      <s:complexType name="ContactKey">
+        <s:attribute name="ContactCode" type="s:string" />
+        <s:attribute name="ContactGUID" type="s:string" />
+      </s:complexType>
+      <s:element name="ContactPutOptions" type="s2:ContactPutOptions" />
+      <s:complexType name="ContactPutOptions">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutOptionsBase" />
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ContactPutResult" type="s2:ContactPutResult" />
+      <s:complexType name="ContactPutResult">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PutResultBase">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ContactRowKeyList" type="s2:ArrayOfContactRowKey" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfContactRowKey">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ContactRowKey" nillable="true" type="s2:ContactRowKey" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ContactRowKey">
+        <s:complexContent mixed="false">
+          <s:extension base="s2:ContactKey">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Success" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="RowIndex" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Activity_GetMetadataSoapIn">
+    <wsdl:part name="parameters" element="tns:Activity_GetMetadata" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetMetadataSoapOut">
+    <wsdl:part name="parameters" element="tns:Activity_GetMetadataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Activity_GetAll" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Activity_GetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetByActivityGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Activity_GetByActivityGUID" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetByActivityGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Activity_GetByActivityGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetByActivityGUIDListSoapIn">
+    <wsdl:part name="parameters" element="tns:Activity_GetByActivityGUIDList" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetByActivityGUIDListSoapOut">
+    <wsdl:part name="parameters" element="tns:Activity_GetByActivityGUIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Activity_PutSoapIn">
+    <wsdl:part name="parameters" element="tns:Activity_Put" />
+  </wsdl:message>
+  <wsdl:message name="Activity_PutSoapOut">
+    <wsdl:part name="parameters" element="tns:Activity_PutResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapIn">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="LoginSoapOut">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapIn">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="LogoutSoapOut">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetMetadataSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetMetadata" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetMetadataSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetMetadataResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetAll" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactGUID" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactGUIDListSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactGUIDList" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactGUIDListSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactGUIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactCode" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactCodeListSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactCodeList" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByContactCodeListSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetByContactCodeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByKeySoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetByKey" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByKeySoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByKeyListSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_GetByKeyList" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetByKeyListSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_GetByKeyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="Contact_PutSoapIn">
+    <wsdl:part name="parameters" element="tns:Contact_Put" />
+  </wsdl:message>
+  <wsdl:message name="Contact_PutSoapOut">
+    <wsdl:part name="parameters" element="tns:Contact_PutResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetMetadataSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetMetadata" />
+  </wsdl:message>
+  <wsdl:message name="User_GetMetadataSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetMetadataResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetAll" />
+  </wsdl:message>
+  <wsdl:message name="User_GetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByUserGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetByUserGUID" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByUserGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetByUserGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByUserGUIDListSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetByUserGUIDList" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByUserGUIDListSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetByUserGUIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByLoginNameSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetByLoginName" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByLoginNameSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetByLoginNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByLoginNameListSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetByLoginNameList" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByLoginNameListSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetByLoginNameListResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByKeySoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetByKey" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByKeySoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByKeyListSoapIn">
+    <wsdl:part name="parameters" element="tns:User_GetByKeyList" />
+  </wsdl:message>
+  <wsdl:message name="User_GetByKeyListSoapOut">
+    <wsdl:part name="parameters" element="tns:User_GetByKeyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="User_PutSoapIn">
+    <wsdl:part name="parameters" element="tns:User_Put" />
+  </wsdl:message>
+  <wsdl:message name="User_PutSoapOut">
+    <wsdl:part name="parameters" element="tns:User_PutResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetMetadataSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetMetadata" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetMetadataSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetMetadataResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetAllSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetAll" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetAllSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupGUID" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupGUIDListSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupGUIDList" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupGUIDListSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupGUIDListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupCode" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupCodeListSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupCodeList" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByUserGroupCodeListSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByUserGroupCodeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByKeySoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByKey" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByKeySoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByKeyListSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByKeyList" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetByKeyListSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_GetByKeyListResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_PutSoapIn">
+    <wsdl:part name="parameters" element="tns:UserGroup_Put" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_PutSoapOut">
+    <wsdl:part name="parameters" element="tns:UserGroup_PutResponse" />
+  </wsdl:message>
+  <wsdl:message name="Activity_GetMetadataHttpPostIn" />
+  <wsdl:message name="Activity_GetMetadataHttpPostOut">
+    <wsdl:part name="Body" element="s1:EntityDefinition" />
+  </wsdl:message>
+  <wsdl:message name="LoginHttpPostIn" />
+  <wsdl:message name="LoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="LogoutHttpPostIn" />
+  <wsdl:message name="LogoutHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="Contact_GetMetadataHttpPostIn" />
+  <wsdl:message name="Contact_GetMetadataHttpPostOut">
+    <wsdl:part name="Body" element="s1:EntityDefinition" />
+  </wsdl:message>
+  <wsdl:message name="User_GetMetadataHttpPostIn" />
+  <wsdl:message name="User_GetMetadataHttpPostOut">
+    <wsdl:part name="Body" element="s1:EntityDefinition" />
+  </wsdl:message>
+  <wsdl:message name="UserGroup_GetMetadataHttpPostIn" />
+  <wsdl:message name="UserGroup_GetMetadataHttpPostOut">
+    <wsdl:part name="Body" element="s1:EntityDefinition" />
+  </wsdl:message>
+  <wsdl:portType name="ApxWSSoap">
+    <wsdl:operation name="Activity_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Activity entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:Activity_GetMetadataSoapIn" />
+      <wsdl:output message="tns:Activity_GetMetadataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetAll">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get a list of all Activities</wsdl:documentation>
+      <wsdl:input message="tns:Activity_GetAllSoapIn" />
+      <wsdl:output message="tns:Activity_GetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetByActivityGUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual Activity by ActivityGUID</wsdl:documentation>
+      <wsdl:input message="tns:Activity_GetByActivityGUIDSoapIn" />
+      <wsdl:output message="tns:Activity_GetByActivityGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetByActivityGUIDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Activities by ActivityGUIDs</wsdl:documentation>
+      <wsdl:input message="tns:Activity_GetByActivityGUIDListSoapIn" />
+      <wsdl:output message="tns:Activity_GetByActivityGUIDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Activity_Put">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Insert/Update/Merge/Delete an Activity (Set the _DBAction field appropriately)</wsdl:documentation>
+      <wsdl:input message="tns:Activity_PutSoapIn" />
+      <wsdl:output message="tns:Activity_PutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide login credentials for APX</wsdl:documentation>
+      <wsdl:input message="tns:LoginSoapIn" />
+      <wsdl:output message="tns:LoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">End login session with APX</wsdl:documentation>
+      <wsdl:input message="tns:LogoutSoapIn" />
+      <wsdl:output message="tns:LogoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Contact entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetMetadataSoapIn" />
+      <wsdl:output message="tns:Contact_GetMetadataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetAll">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get a list of all Contacts</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetAllSoapIn" />
+      <wsdl:output message="tns:Contact_GetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactGUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual Contact by ContactGUID</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetByContactGUIDSoapIn" />
+      <wsdl:output message="tns:Contact_GetByContactGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactGUIDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Contacts by ContactGUIDs</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetByContactGUIDListSoapIn" />
+      <wsdl:output message="tns:Contact_GetByContactGUIDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual Contact by ContactCode</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetByContactCodeSoapIn" />
+      <wsdl:output message="tns:Contact_GetByContactCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactCodeList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Contacts by ContactCodes</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetByContactCodeListSoapIn" />
+      <wsdl:output message="tns:Contact_GetByContactCodeListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual Contact by Contact Key Structure</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetByKeySoapIn" />
+      <wsdl:output message="tns:Contact_GetByKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByKeyList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Contacts by Contact Key Structures</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetByKeyListSoapIn" />
+      <wsdl:output message="tns:Contact_GetByKeyListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_Put">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Insert/Update/Merge/Delete a Contact (Set the _DBAction field appropriately)</wsdl:documentation>
+      <wsdl:input message="tns:Contact_PutSoapIn" />
+      <wsdl:output message="tns:Contact_PutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get User entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:User_GetMetadataSoapIn" />
+      <wsdl:output message="tns:User_GetMetadataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAll">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get a list of all Users</wsdl:documentation>
+      <wsdl:input message="tns:User_GetAllSoapIn" />
+      <wsdl:output message="tns:User_GetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByUserGUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual User by UserGUID</wsdl:documentation>
+      <wsdl:input message="tns:User_GetByUserGUIDSoapIn" />
+      <wsdl:output message="tns:User_GetByUserGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByUserGUIDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Users by UserGUIDs</wsdl:documentation>
+      <wsdl:input message="tns:User_GetByUserGUIDListSoapIn" />
+      <wsdl:output message="tns:User_GetByUserGUIDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByLoginName">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual User by LoginName</wsdl:documentation>
+      <wsdl:input message="tns:User_GetByLoginNameSoapIn" />
+      <wsdl:output message="tns:User_GetByLoginNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByLoginNameList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Users by LoginNames</wsdl:documentation>
+      <wsdl:input message="tns:User_GetByLoginNameListSoapIn" />
+      <wsdl:output message="tns:User_GetByLoginNameListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual User by User Key Structure</wsdl:documentation>
+      <wsdl:input message="tns:User_GetByKeySoapIn" />
+      <wsdl:output message="tns:User_GetByKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByKeyList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Users by User Key Structures</wsdl:documentation>
+      <wsdl:input message="tns:User_GetByKeyListSoapIn" />
+      <wsdl:output message="tns:User_GetByKeyListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_Put">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Insert/Update/Merge/Delete a User (Set the _DBAction field appropriately)</wsdl:documentation>
+      <wsdl:input message="tns:User_PutSoapIn" />
+      <wsdl:output message="tns:User_PutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get User Group entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetMetadataSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetMetadataSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetAll">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get a list of all User Groups</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetAllSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetAllSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupGUID">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual User Group by UserGroupGUID</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetByUserGroupGUIDSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetByUserGroupGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupGUIDList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of User Groups by UserGroupGUIDs</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetByUserGroupGUIDListSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetByUserGroupGUIDListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupCode">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual User Group by UserGroupCode</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetByUserGroupCodeSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetByUserGroupCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupCodeList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of User Groups by UserGroupCodes</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetByUserGroupCodeListSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetByUserGroupCodeListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get individual User Group by User Group Key Structure</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetByKeySoapIn" />
+      <wsdl:output message="tns:UserGroup_GetByKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByKeyList">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get list of Users Groups by User Groups Key Structures</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetByKeyListSoapIn" />
+      <wsdl:output message="tns:UserGroup_GetByKeyListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_Put">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Insert/Update/Merge/Delete a User Group (Set the _DBAction field appropriately)</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_PutSoapIn" />
+      <wsdl:output message="tns:UserGroup_PutSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ApxWSHttpPost">
+    <wsdl:operation name="Activity_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Activity entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:Activity_GetMetadataHttpPostIn" />
+      <wsdl:output message="tns:Activity_GetMetadataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Provide login credentials for APX</wsdl:documentation>
+      <wsdl:input message="tns:LoginHttpPostIn" />
+      <wsdl:output message="tns:LoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">End login session with APX</wsdl:documentation>
+      <wsdl:input message="tns:LogoutHttpPostIn" />
+      <wsdl:output message="tns:LogoutHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get Contact entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:Contact_GetMetadataHttpPostIn" />
+      <wsdl:output message="tns:Contact_GetMetadataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="User_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get User entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:User_GetMetadataHttpPostIn" />
+      <wsdl:output message="tns:User_GetMetadataHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetMetadata">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Get User Group entity metadata, including field details</wsdl:documentation>
+      <wsdl:input message="tns:UserGroup_GetMetadataHttpPostIn" />
+      <wsdl:output message="tns:UserGroup_GetMetadataHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ApxWSSoap" type="tns:ApxWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Activity_GetMetadata">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetAll">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetByActivityGUID">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetByActivityGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetByActivityGUIDList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetByActivityGUIDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_Put">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_Put" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetMetadata">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetAll">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactGUID">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactGUIDList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactGUIDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactCode">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactCodeList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactCodeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByKey">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByKeyList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByKeyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_Put">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_Put" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetMetadata">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAll">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByUserGUID">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByUserGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByUserGUIDList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByUserGUIDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByLoginName">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByLoginName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByLoginNameList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByLoginNameList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByKey">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByKeyList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByKeyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_Put">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/User_Put" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetMetadata">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetAll">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupGUID">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupGUIDList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupGUIDList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupCode">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupCodeList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupCodeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByKey">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByKeyList">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByKeyList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_Put">
+      <soap:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_Put" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ApxWSSoap12" type="tns:ApxWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Activity_GetMetadata">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetAll">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetByActivityGUID">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetByActivityGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_GetByActivityGUIDList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_GetByActivityGUIDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Activity_Put">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Activity_Put" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Logout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetMetadata">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetAll">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactGUID">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactGUIDList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactGUIDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactCode">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByContactCodeList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByContactCodeList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByKey">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetByKeyList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_GetByKeyList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_Put">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/Contact_Put" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetMetadata">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetAll">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByUserGUID">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByUserGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByUserGUIDList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByUserGUIDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByLoginName">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByLoginName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByLoginNameList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByLoginNameList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByKey">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetByKeyList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_GetByKeyList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_Put">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/User_Put" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetMetadata">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetMetadata" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetAll">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupGUID">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupGUIDList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupGUIDList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupCode">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByUserGroupCodeList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByUserGroupCodeList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByKey">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetByKeyList">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_GetByKeyList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_Put">
+      <soap12:operation soapAction="http://www.advent.com/webservices/apx/v2/UserGroup_Put" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ApxWSHttpPost" type="tns:ApxWSHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="Activity_GetMetadata">
+      <http:operation location="/Activity_GetMetadata" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <http:operation location="/Login" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <http:operation location="/Logout" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Contact_GetMetadata">
+      <http:operation location="/Contact_GetMetadata" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="User_GetMetadata">
+      <http:operation location="/User_GetMetadata" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserGroup_GetMetadata">
+      <http:operation location="/UserGroup_GetMetadata" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ApxWS">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Version 2 (Latest Version)</wsdl:documentation>
+    <wsdl:port name="ApxWSSoap" binding="tns:ApxWSSoap">
+      <soap:address location="http://vmapxba9/apxlogin/services/V2/ApxWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ApxWSSoap12" binding="tns:ApxWSSoap12">
+      <soap12:address location="http://vmapxba9/apxlogin/services/V2/ApxWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ApxWSHttpPost" binding="tns:ApxWSHttpPost">
+      <http:address location="http://vmapxba9/apxlogin/services/V2/ApxWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

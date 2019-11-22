@@ -84,6 +84,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.IdentityModel.Tokens.Jwt.5.4.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
@@ -105,9 +106,11 @@
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -115,14 +118,108 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvIdentityClient.cs" />
-    <Compile Include="APXClient.cs" />
+    <Compile Include="ApxOidcClient.cs" />
+    <Compile Include="ApxRestClient.cs" />
+    <Compile Include="ApxSoapClient.cs" />
+    <Compile Include="ApxWS.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ApxSoap\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ApxSoap\ActivityPutOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ActivityPutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ActivityQueryOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ActivityQueryResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ApxWS.wsdl" />
+    <None Include="Web References\ApxSoap\ContactPutOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ContactPutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ContactQueryOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\ContactQueryResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\EntityDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ApxSoap\Status.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserGroupPutOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserGroupPutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserGroupQueryOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserGroupQueryResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserPutOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserPutResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserQueryOptions.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ApxSoap\UserQueryResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://vmapxba9/apxlogin/services/V2/ApxWS.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ApxSoap\</RelPath>
+      <UpdateFromURL>http://vmapxba9/apxlogin/services/V2/ApxWS.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>AdvOidcSample_ApxSoap_ApxWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ApxSoap\ApxWS.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
