@@ -18,8 +18,10 @@
             var token = client.LoginNT();
 
             var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
-            apxRestClient.GetPortfolios();
-            apxRestClient.GetBlotters();
+            apxRestClient.GetPortfoliosOdata();
+            apxRestClient.GetPortfoliosInternal();
+            apxRestClient.GetBlottersV1();
+            apxRestClient.GetBlottersV2();
 
             var apxSoapClient = new ApxSoapClient(baseAddress, token.AccessToken);
             apxSoapClient.GetContacts();
