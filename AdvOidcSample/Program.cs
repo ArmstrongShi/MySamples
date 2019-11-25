@@ -18,10 +18,9 @@
             var token = client.LoginNT();
 
             var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
-            apxRestClient.GetPortfoliosOdata();
-            apxRestClient.GetPortfoliosInternal();
-            apxRestClient.GetBlottersV1();
-            apxRestClient.GetBlottersV2();
+            apxRestClient.HttpGet("apxlogin/api/odata/v1/Portfolios?$select=PortfolioCode");
+            apxRestClient.HttpGet("apxlogin/api/v1/blotters");
+            apxRestClient.HttpGet("apxlogin/api/v2/blotters?$select=BlotterName");
 
             var apxSoapClient = new ApxSoapClient(baseAddress, token.AccessToken);
             apxSoapClient.GetContacts();
