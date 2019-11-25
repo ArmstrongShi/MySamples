@@ -1,4 +1,8 @@
 ﻿
+/*
+ * Add this class to your client code.
+ * The namespance must be same as the web reference that you added.
+ */
 namespace AdvOidcSample.ApxSoap
 {
     using System;
