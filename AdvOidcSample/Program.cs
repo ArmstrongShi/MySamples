@@ -6,7 +6,7 @@
     {
         static void Main(string[] args)
         {
-            string baseAddress = "http://vmapxba9.advent.com";
+            string baseAddress = "http://apx.advent.com";
             var client = new ApxOidcClient
             {
                 BaseAddress = baseAddress,
@@ -15,7 +15,7 @@
                 Scope = "apxapi offline_access"
             };
 
-            var token = client.LoginNT();
+            var token = client.WindowsLogin();
 
             var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
             apxRestClient.HttpGet("apxlogin/api/odata/v1/Portfolios?$select=PortfolioCode");

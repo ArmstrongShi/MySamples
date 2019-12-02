@@ -7,15 +7,17 @@ namespace AdvOidcSample
 
     public class ApxSoapClient
     {
-        ApxWS client = new ApxWS();
+        private ApxWS apxws;
 
         public ApxSoapClient(string baseAddress, string accessToken)
         {
-            this.client.AccessToken = accessToken;
+            this.apxws = new ApxWS();
+            this.apxws.AccessToken = accessToken;
+
             Uri serviceUri = null;
             if (Uri.TryCreate(new Uri(baseAddress), "apxlogin/services/V2/ApxWS.asmx", out serviceUri))
             {
-                this.client.Url = serviceUri.AbsoluteUri;
+                this.apxws.Url = serviceUri.AbsoluteUri;
             }
         }
 
@@ -23,7 +25,7 @@ namespace AdvOidcSample
         {
             ContactQueryOptions queryOptions = new ContactQueryOptions();
             ContactQueryResult queryResult = null;
-            var status = this.client.Contact_GetAll(ref queryOptions, out queryResult);
+            var status = this.apxws.Contact_GetAll(ref queryOptions, out queryResult);
             Console.WriteLine("===========Start Printing Contacts===========");
             if (queryResult.ContactList==null || queryResult.ContactList.Length==0)
             {

@@ -5,10 +5,11 @@
 
     class ApxRestClient
     {
-        private HttpClient client = new HttpClient();
+        private HttpClient client;
 
         public ApxRestClient(string baseAddress, string accessToken)
         {
+            this.client = new HttpClient();
             this.client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
             this.client.BaseAddress = new Uri(baseAddress);
         }

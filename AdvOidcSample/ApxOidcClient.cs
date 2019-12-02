@@ -61,6 +61,7 @@ namespace AdvOidcSample
         {
             Uri requestUri = null;
             Uri baseUri = new Uri(this.BaseAddress);
+            // You must get the issuer from this APX well-known API first, which does not require login
             string relativeUri = "apxlogin/api/well-known/authentication-configuration";
             if (Uri.TryCreate(baseUri, relativeUri, out requestUri))
             {
@@ -96,12 +97,12 @@ namespace AdvOidcSample
         }
 
         /// <summary>
-        /// Login with APX Username and Password
+        /// Login through Password flow which requires providing username and password to client app.
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public TokenResponse LoginPwd(string username, string password)
+        public TokenResponse PasswordLogin(string username, string password)
         {
             this.BypassSelfSignedCertificateValidationError();
 
@@ -121,10 +122,10 @@ namespace AdvOidcSample
         }
 
         /// <summary>
-        /// Login with Windows-NT User
+        /// Login through Windows Authentication Flow which supports Windows-Integrated users.
         /// </summary>
         /// <returns></returns>
-        public TokenResponse LoginNT()
+        public TokenResponse WindowsLogin()
         {
             this.BypassSelfSignedCertificateValidationError();
 
@@ -169,10 +170,10 @@ namespace AdvOidcSample
         }
 
         /// <summary>
-        /// Signin via Identity Server Login Page
+        /// Login through Authorization Code Flow which requires user interaction to provide username and password to Identity Server.
         /// </summary>
         /// <returns></returns>
-        public LoginResult LoginCode()
+        public LoginResult AuthorizationCodeLogin()
         {
             this.BypassSelfSignedCertificateValidationError();
 
@@ -182,12 +183,13 @@ namespace AdvOidcSample
             lisener.Prefixes.Add(redirectUri);
             lisener.Start();
 
+            // You must make sure the client and redirect uri are registered to Identity Server, otherwise you will see "unauthorized client" error.
             var options = new OidcClientOptions
             {
                 Authority = this.Disco.Issuer,
                 ClientId = this.ClientId,
                 Scope = this.Scope,
-                RedirectUri = redirectUri,
+                RedirectUri = redirectUri, 
                 Flow = OidcClientOptions.AuthenticationFlow.AuthorizationCode,
                 ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect
             };
@@ -257,7 +259,8 @@ namespace AdvOidcSample
 
         private void BypassSelfSignedCertificateValidationError()
         {
-            // bypass self-signed Certificate error
+            // If you are using self-signed cerificate, you may need to bypass certificate validation errors
+            // or create your logic to validate certificate.
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
         }
 
