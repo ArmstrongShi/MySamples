@@ -98,7 +98,7 @@
 
         public IdentityServerHelper(string applicationServer)
         {
-            this.authority = string.Format("https://{0}:5001", applicationServer);
+            this.authority = string.Format("http://{0}:5000", applicationServer);
         }
 
         public void InstallCertificate()
@@ -172,8 +172,12 @@
         private string RequestToken(string username, string password)
         {
             HttpClient httpClient = new HttpClient();
+            var discoTask = httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = this.authority,
+                Policy = { RequireHttps = false }
+            });
 
-            var discoTask = httpClient.GetDiscoveryDocumentAsync(this.authority);
             discoTask.Wait();
             var disco = discoTask.Result;
 

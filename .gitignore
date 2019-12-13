@@ -22,3 +22,10 @@
 /APXWS/RESTful/.vs/BlotterApi/v15
 /APXWS/InternalApi/bin/Debug
 /APXWS/InternalApi/obj/Debug
+/ApxWebServerSetup/.vs/ApxWebServerSetup/v15
+/ApxWebServerSetup/ApxWebServerSetup/bin/Debug
+/ApxWebServerSetup/ApxWebServerSetup/obj/Debug
+/ApxWebServerSetup/IdentityServerHelper/bin/Debug
+/ApxWebServerSetup/IdentityServerHelper/obj/Debug
+/ApxWebServerSetup/packages
+*.zip
