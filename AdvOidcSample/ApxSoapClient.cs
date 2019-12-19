@@ -23,10 +23,11 @@ namespace AdvOidcSample
 
         public void GetContacts()
         {
+            Console.WriteLine("===========Start SOAP Request===========");
             ContactQueryOptions queryOptions = new ContactQueryOptions();
             ContactQueryResult queryResult = null;
             var status = this.apxws.Contact_GetAll(ref queryOptions, out queryResult);
-            Console.WriteLine("===========Start Printing Contacts===========");
+            
             if (queryResult.ContactList==null || queryResult.ContactList.Length==0)
             {
                 Console.WriteLine("No Contacts");
@@ -35,7 +36,7 @@ namespace AdvOidcSample
             {
                 Console.WriteLine("ContactCode={0}", contact.ContactCode);
             }
-            Console.WriteLine("===========End Printing Contacts===========");
+            Console.WriteLine("===========End SOAP Request===========");
         }
     }
 }

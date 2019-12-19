@@ -16,18 +16,18 @@
 
         public string HttpGet(string relativeUri)
         {
+            Console.WriteLine("===========Start REST Request : {0}===========", relativeUri);
             Uri requestUri = null;
+            string result = null;
             if (Uri.TryCreate(this.client.BaseAddress, relativeUri, out requestUri))
             {
-                Console.WriteLine("===========Start : {0}===========", relativeUri);
                 HttpResponseMessage response = this.client.GetAsync(requestUri).Result;
-                string result = response.Content.ReadAsStringAsync().Result;
-                Console.WriteLine(result);
-                Console.WriteLine("===========End : {0}===========", relativeUri);
-                return result;
+                result = response.Content.ReadAsStringAsync().Result;
             }
 
-            return null;
+            Console.WriteLine(result);
+            Console.WriteLine("===========End REST Request : {0}===========", relativeUri);
+            return result;
         }
     }
 }

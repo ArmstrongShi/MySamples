@@ -6,7 +6,7 @@
     {
         static void Main(string[] args)
         {
-            string baseAddress = "http://apx.advent.com";
+            string baseAddress = "http://vmapxba9.advent.com";
             var client = new ApxOidcClient
             {
                 BaseAddress = baseAddress,
@@ -15,12 +15,11 @@
                 Scope = "apxapi offline_access"
             };
 
-            var token = client.WindowsLogin();
+            var token = client.PasswordLogin("api","advs");
 
             var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
-            apxRestClient.HttpGet("apxlogin/api/odata/v1/Portfolios?$select=PortfolioCode");
-            apxRestClient.HttpGet("apxlogin/api/v1/blotters");
-            apxRestClient.HttpGet("apxlogin/api/v2/blotters?$select=BlotterName");
+            apxRestClient.HttpGet("apxlogin/api/odata/v1/portfolios");
+            apxRestClient.HttpGet("apxlogin/api/v2/blotters");
 
             var apxSoapClient = new ApxSoapClient(baseAddress, token.AccessToken);
             apxSoapClient.GetContacts();
