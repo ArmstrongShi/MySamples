@@ -38,5 +38,37 @@ namespace AdvOidcSample
             }
             Console.WriteLine("===========End SOAP Request===========");
         }
+
+        public void ShareAddress()
+        {
+            // query address owner and its address to share
+            ContactQueryOptions queryOptions = new ContactQueryOptions();
+            queryOptions.IncludeContactAddressList = true;
+            ContactQueryResult queryResult = null;
+            var qStatus = this.apxws.Contact_GetByContactCode(ref queryOptions, "owner", out queryResult);
+            Contact owner = queryResult.ContactList[0];
+            // owner's address
+            ContactAddress address = owner.ContactAddressList[0];
+
+            ContactPutOptions putOptions = new ContactPutOptions();
+            ContactPutResult putResult = null;
+
+            // the contact that shares owner's address
+            Contact contact = new Contact();
+            contact.ContactCode = "Sharing";
+            contact._DBAction = DBAction.Update;            
+
+            address.ContactCode = contact.ContactCode;
+            address._UpdatedFields.ContactCode = true;
+            address.AddressLabel = "Business";
+            address._UpdatedFields.AddressLabel = true;
+            address._UpdatedFields.AddressGUID = true;
+            address._DBAction = DBAction.Insert;
+
+            contact.ContactAddressList = new ContactAddress[] { address };
+            contact._IncludesContactAddressList = true;
+            
+            var pStatus = this.apxws.Contact_Put(ref putOptions, contact, out putResult);
+        }
     }
 }
