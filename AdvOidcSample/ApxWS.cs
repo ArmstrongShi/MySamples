@@ -17,7 +17,11 @@ namespace AdvOidcSample.ApxSoap
         protected override System.Net.WebRequest GetWebRequest(Uri uri)
         {
             var request = base.GetWebRequest(uri);
-            request.Headers.Add("Authorization", string.Format("Bearer {0}", AccessToken));
+            if (!string.IsNullOrEmpty(this.AccessToken))
+            {
+                request.Headers.Add("Authorization", string.Format("Bearer {0}", AccessToken));
+            }
+
             return request;
         }
     }
