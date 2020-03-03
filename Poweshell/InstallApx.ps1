@@ -473,26 +473,23 @@ function RemoveApxServer($setupExePath)
 	}
 }
 
+function DropDatabase($database)
+{
+	$query = "IF DB_ID('$database') IS NOT NULL ALTER DATABASE [$database] SET ONLINE, SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE IF EXISTS [$database]; "
+	invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
+}
+
 function RemoveApxDatabase()
 {
-	 $query = "ALTER DATABASE [APXController] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;DROP DATABASE [APXController]; 
-         ALTER DATABASE [APXController_Archive] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [APXController_Archive]; 
-         ALTER DATABASE [APXFirm] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [APXFirm]; 
-         ALTER DATABASE [APXFirm_Archive] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [APXFirm_Archive];
-         ALTER DATABASE [APXFirm_Doc] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [APXFirm_Doc]; 
-         ALTER DATABASE [APXFirm_Temp] 
-         SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [APXFirm_Temp]; 
-         ALTER DATABASE [MDM] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [MDM];
-         ALTER DATABASE [AdventIdentityServices] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-         DROP DATABASE [AdventIdentityServices];"
+	DropDatabase 'APXController'
+	DropDatabase 'APXController_Archive'
+	DropDatabase 'APXFirm'
+	DropDatabase 'APXFirm_Archive'
+	DropDatabase 'APXFirm_Doc'
+	DropDatabase 'APXFirm_Temp'
+	DropDatabase 'MDM'
+	DropDatabase 'AdventIdentityServices'
 
-     invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
 }
 
 function ResetAdminPassword()
@@ -581,6 +578,37 @@ function ShowErrorMessage($msg)
 function ShowInformation($msg)
 {
 	[System.Windows.Forms.MessageBox]::Show($msg,'Information',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+}
+
+function FindBuild()
+{
+    $dialog = New-Object System.Windows.Forms.OpenFileDialog
+    $dialog.InitialDirectory = "\\source.advent.com\img\qaimg\APX\APX_UI"
+    $result = $dialog.ShowDialog()
+    if($result -eq [System.Windows.Forms.DialogResult]::OK)
+    {
+        return $dialog.FileName        
+    }
+}
+
+function InstallAPXUI($msiPath,$server)
+{	
+	if(test-path -Path $msiPath)
+	{
+		$scriptBlock=[System.String]::Format('msiexec /i {0} /qr WEBSITENAME="Default Web Site" APX_API_URL="{1}" INSTALLFOLDER="{2}" Ids_Username="admin" Ids_Password="advs"',$msiPath,$server,$installFolder)
+		InvokeCommand $scriptBlock
+	}
+}
+
+function UninstallAPXUI()
+{
+	InvokeCommand 'msiexec /x {e5df4831-2502-4a20-ae3b-4e45dc134bc3} /qb'
+}
+
+function InvokeCommand ($scriptBlock) 
+{
+	Stop-Process -name iexplore -force -ErrorAction SilentlyContinue
+	Invoke-Command -ScriptBlock { & cmd /c $scriptBlock}
 }
 
 ShowParameterInputDialog
