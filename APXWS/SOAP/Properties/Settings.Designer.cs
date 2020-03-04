@@ -12,7 +12,7 @@ namespace Advent.ApxSoap.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "12.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,20 +26,20 @@ namespace Advent.ApxSoap.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://vmapxba8/APX/services/V2/ApxWS.asmx")]
-        public string ApxWS {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://vmapxba9/APX/services/AuthenticateWS.asmx")]
+        public string AuthWS {
             get {
-                return ((string)(this["ApxWS"]));
+                return ((string)(this["AuthWS"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://vmapxba8/APX/services/AuthenticateWS.asmx")]
-        public string AuthenticateWS {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://vmapxba9/APX/services/V2/ApxWS.asmx")]
+        public string ApxWS {
             get {
-                return ((string)(this["AuthenticateWS"]));
+                return ((string)(this["ApxWS"]));
             }
         }
     }

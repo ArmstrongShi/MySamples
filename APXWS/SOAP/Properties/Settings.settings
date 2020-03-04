@@ -2,11 +2,11 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Advent.ApxSoap.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ApxWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://vmapxba8/APX/services/V2/ApxWS.asmx</Value>
+    <Setting Name="AuthWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vmapxba9/APX/services/AuthenticateWS.asmx</Value>
     </Setting>
-    <Setting Name="AuthenticateWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://vmapxba8/APX/services/AuthenticateWS.asmx</Value>
+    <Setting Name="ApxWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://vmapxba9/APX/services/V2/ApxWS.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

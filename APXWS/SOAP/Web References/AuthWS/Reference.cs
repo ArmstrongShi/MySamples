@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace Advent.ApxSoap.AuthenticateWS {
+namespace Advent.ApxSoap.AuthWS {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -23,7 +23,7 @@ namespace Advent.ApxSoap.AuthenticateWS {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="AuthenticateWSSoap", Namespace="http://www.advent.com/webservices")]
@@ -37,7 +37,7 @@ namespace Advent.ApxSoap.AuthenticateWS {
         
         /// <remarks/>
         public AuthenticateWS() {
-            this.Url = global::Advent.ApxSoap.Properties.Settings.Default.AuthenticateWS;
+            this.Url = global::Advent.ApxSoap.Properties.Settings.Default.AuthWS;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -151,11 +151,11 @@ namespace Advent.ApxSoap.AuthenticateWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
     public delegate void LoginCompletedEventHandler(object sender, LoginCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -177,11 +177,11 @@ namespace Advent.ApxSoap.AuthenticateWS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
     public delegate void LogoutCompletedEventHandler(object sender, LogoutCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3062.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LogoutCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

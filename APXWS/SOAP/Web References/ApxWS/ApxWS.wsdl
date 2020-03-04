@@ -1215,6 +1215,8 @@
             <s:attribute name="AccessAllUserGroups" type="s:boolean" use="required" />
             <s:attribute name="AccessAllUsersRoleID" type="s:string" />
             <s:attribute name="AccessAllUsersRoleIDIsNull" type="s:boolean" use="required" />
+            <s:attribute name="AllowMultipleSessionsPerLogin" type="s:string" />
+            <s:attribute name="AllowMultipleSessionsPerLoginIsNull" type="s:boolean" use="required" />
             <s:attribute name="CanAccessAllUsersPrivateData" type="s:boolean" use="required" />
             <s:attribute name="CanAccessAllUsersPrivateDataIsNull" type="s:boolean" use="required" />
             <s:attribute name="DefaultRoleID" type="s:string" />
@@ -1294,6 +1296,7 @@
           <s:extension base="s1:EntityUpdatedFieldsBase">
             <s:attribute name="AccessAllUserGroups" type="s:boolean" use="required" />
             <s:attribute name="AccessAllUsersRoleID" type="s:boolean" use="required" />
+            <s:attribute name="AllowMultipleSessionsPerLogin" type="s:boolean" use="required" />
             <s:attribute name="CanAccessAllUsersPrivateData" type="s:boolean" use="required" />
             <s:attribute name="DefaultRoleID" type="s:boolean" use="required" />
             <s:attribute name="EmailAddress" type="s:boolean" use="required" />

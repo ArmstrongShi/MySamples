@@ -9,16 +9,13 @@ namespace Advent.ApxSoap
     {
         static void Main(string[] args)
         {
-            //using (ApxSoapApiProxy proxy = 
-            //    new ApxSoapApiProxy(
-            //        ConfigurationManager.AppSettings["LoginName"], 
-            //        ConfigurationManager.AppSettings["Password"]))
-            //using (ApxSoapApiProxy proxy = new ApxSoapApiProxy())
-            //{
-            //    Program.Sample_CreateNewUser(proxy.ApxWS);
-            //}
+            AuthClient client = new AuthClient("http://vmapxba9.advent.com");
+            ApxWS.ApxWS apxws = client.Login("api", "advs"); // DB User
+            //apxws = client.Login(); // Win NT user
 
-            Program.Sample_TokenBasedAuth();
+            ApxWS.UserQueryOptions queryOptions = new ApxWS.UserQueryOptions();
+            ApxWS.UserQueryResult queryResult;
+            ApxWS.Status status = apxws.User_GetAll(ref queryOptions, out queryResult);
         }
 
         private static void Sample_TokenBasedAuth()
