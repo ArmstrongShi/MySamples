@@ -6,7 +6,7 @@
     {
         static void Main(string[] args)
         {
-            string baseAddress = "http://vmapxba9.advent.com";
+            string baseAddress = "http://vmapxba7.gencos.com";
             var client = new ApxOidcClient
             {
                 BaseAddress = baseAddress,
@@ -17,12 +17,13 @@
 
             var token = client.PasswordLogin("api","advs");
 
-            var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
-            apxRestClient.HttpGet("apxlogin/api/odata/v1/portfolios");
-            apxRestClient.HttpGet("apxlogin/api/v2/blotters");
+            //var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
+            //apxRestClient.HttpGet("apxlogin/api/odata/v1/portfolios");
+            //apxRestClient.HttpGet("apxlogin/api/v2/blotters");
 
             var apxSoapClient = new ApxSoapClient(baseAddress, token.AccessToken);
-            apxSoapClient.GetContacts();
+            //apxSoapClient.GetContacts();
+            apxSoapClient.SetExampleUserEmail();
 
             Console.WriteLine("Press Enter to continue.");
             Console.ReadLine();

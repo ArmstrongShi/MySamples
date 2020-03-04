@@ -82,5 +82,42 @@ namespace AdvOidcSample
             
             var pStatus = this.apxws.Contact_Put(ref putOptions, contact, out putResult);
         }
+
+        public void SetExampleUserEmail()
+        {
+            UserQueryOptions qOptions = new UserQueryOptions();
+            UserQueryResult qResult = null;
+            var qStatus = this.apxws.User_GetAll(ref qOptions, out qResult);
+            if (qStatus.Success)
+            {
+                foreach (User user in qResult?.UserList)
+                {
+                    if (user.EmailAddressIsNull)
+                    {
+                        string exampleEmail = user.LoginName.Replace('\\', '.') + "@example.com";
+                        user.EmailAddress = exampleEmail;
+                        user.EmailAddressIsNull = false;
+                        user._UpdatedFields.EmailAddress = true;
+                        user._DBAction = DBAction.Merge;
+                        UserPutOptions pOptions = new UserPutOptions();
+                        UserPutResult pResult = null;
+                        var pStatus = this.apxws.User_Put(ref pOptions, user, out pResult);
+                        if (!pStatus.Success)
+                        {
+                            Console.WriteLine("Fail to update email for user {0}", user.LoginName);
+                            Console.WriteLine("Exception: {0}", pStatus.ExceptionText);
+                            foreach (StatusMessage msg in pStatus.EntityStatusDetails.MessageList)
+                            {
+                                Console.WriteLine("{0} - {1}", msg.FieldTag, msg.Message);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("An example email address {0} is set for User {1}");
+                        }
+                    }
+                }
+            }
+        }
     }
 }
