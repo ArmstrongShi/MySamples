@@ -1,4 +1,4 @@
-﻿namespace Advent.ApxSoap
+﻿namespace Advent.ApxSoap.Authentication
 {
     using IdentityModel.Client;
     using Newtonsoft.Json;
@@ -94,8 +94,18 @@
             });
 
             response.Wait();
-            var result = response.Result;
-            return result;
+            if (!response.IsCompleted)
+            {
+                throw response.Exception;
+            }
+
+            var token = response.Result;
+            if (token.IsError)
+            {
+                throw new Exception(token.ErrorDescription);
+            }
+
+            return token;
         }
 
         /// <summary>
@@ -119,7 +129,18 @@
                 Password = password
             });
 
-            response.Wait();
+            response.Wait(60000);
+            if (!response.IsCompleted)
+            {
+                throw response.Exception;
+            }
+
+            var token = response.Result;
+            if (token.IsError)
+            {
+                throw new Exception(token.ErrorDescription);
+            }
+
             return response.Result;
         }
 
