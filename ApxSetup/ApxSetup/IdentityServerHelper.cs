@@ -283,7 +283,9 @@
             HttpClient httpClient = new HttpClient();
             var get = httpClient.GetAsync(requestUri);
             get.Wait();
-            var configuration = JsonConvert.DeserializeObject<AuthenticationConfiguration>(get.Result.Content.ReadAsStringAsync().Result);
+
+            var result = get.Result.Content.ReadAsStringAsync().Result;
+            var configuration = JsonConvert.DeserializeObject<AuthenticationConfiguration>(result);
             string idsAuthority = configuration.Issuer;
 
             return idsAuthority;
