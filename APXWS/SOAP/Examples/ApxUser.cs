@@ -4,7 +4,7 @@ namespace Advent.ApxSoap
     using Advent.ApxSoap.ApxWS;
     using System;
 
-    class UserExamples
+    class ApxUser
     {
         /// <summary>
         /// This example shows how to create a new user

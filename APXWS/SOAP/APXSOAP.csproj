@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Authentication\ApxWs.cs" />
     <Compile Include="Authentication\AuthClient.cs" />
+    <Compile Include="Authentication\AuthenticateWS.cs" />
     <Compile Include="Examples\ApxActivity.cs" />
     <Compile Include="Examples\ApxContact.cs" />
     <Compile Include="Program.cs" />

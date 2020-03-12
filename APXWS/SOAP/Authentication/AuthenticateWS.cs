@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Advent.ApxSoap.ApxWS
+namespace Advent.ApxSoap.AuthWS
 {
-    public partial class ApxWS : System.Web.Services.Protocols.SoapHttpClientProtocol
+    public partial class AuthenticateWS : System.Web.Services.Protocols.SoapHttpClientProtocol
     {
         public string AccessToken
         {

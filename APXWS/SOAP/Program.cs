@@ -11,7 +11,9 @@ namespace Advent.ApxSoap
             ApxWS.ApxWS apxws = client.Login("api", "advs"); // DB User
             //apxws = client.Login(); // Win NT user
 
-            ApxActivity.Sample_CreateNewActivity(apxws);
+            ApxActivity.CreateNewActivity(apxws);
+
+            bool logout = client.Logout();
         }
     }
 }

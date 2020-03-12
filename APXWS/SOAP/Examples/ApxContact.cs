@@ -4,13 +4,13 @@ namespace Advent.ApxSoap.Examples
     using Advent.ApxSoap.ApxWS;
     using System;
 
-    class ContactExamples
+    class ApxContact
     {
         /// <summary>
         /// This example shows how to find and update a contact
         /// </summary>
         /// <param name="apxWS"></param>
-        private static void Contact(ApxWS apxWS)
+        public static void UpdateContact(ApxWS apxWS)
         {
             ContactQueryOptions queryOptions = new ContactQueryOptions();
             ContactQueryResult queryResult;
@@ -45,7 +45,7 @@ namespace Advent.ApxSoap.Examples
         /// Case 3: Clear Business address line 3
         /// </summary>
         /// <param name="apxWS"></param>
-        private static void ContactAddress(ApxWS apxWS)
+        public static void ContactAddress(ApxWS apxWS)
         {
             ContactQueryOptions queryOptions = new ContactQueryOptions();
             // To return addresses along with contact, you must set this field to true
@@ -123,7 +123,7 @@ namespace Advent.ApxSoap.Examples
         /// This example shows how to clear fields
         /// </summary>
         /// <param name="apxWS"></param>
-        private static void ClearContactFields(ApxWS apxWS)
+        public static void ClearContactFields(ApxWS apxWS)
         {
             ContactQueryOptions queryOptions = new ContactQueryOptions();
             ContactQueryResult queryResult;
@@ -202,7 +202,7 @@ namespace Advent.ApxSoap.Examples
         /// This example shows how to add a new interested party to contact
         /// </summary>
         /// <param name="apxWS"></param>
-        private static void AddNewInterestedParty(ApxWS apxWS)
+        public static void AddNewInterestedParty(ApxWS apxWS)
         {
             ContactQueryOptions queryOptions = new ContactQueryOptions();
             queryOptions.IncludeInterestedPartyList = true;

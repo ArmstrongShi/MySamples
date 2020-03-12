@@ -8,7 +8,7 @@ namespace Advent.ApxSoap.Examples
         /// This example shows how to create a new activity
         /// </summary>
         /// <param name="apxWS"></param>
-        public static void Sample_CreateNewActivity(ApxWS apxWS)
+        public static void CreateNewActivity(ApxWS apxWS)
         {
             Activity email = new Activity();
             email._DBAction = DBAction.Insert;

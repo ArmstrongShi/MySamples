@@ -18,6 +18,7 @@
         private AuthenticationConfiguration authConfig;
         private DiscoveryDocumentResponse disco;
         private string apxWebServerUrl;
+        private AuthWS.AuthenticateWS authWS;
 
         public AuthClient(string apxWebServerUrl)
         {
@@ -39,10 +40,11 @@
             {
                 TokenResponse token = this.OidcLogin(username, password);
                 apxws = this.CreateApxWS(token.AccessToken);
+                this.authWS = this.CreateAuthenticateWS(token.AccessToken);
             }
             else
             {
-                AuthWS.AuthenticateWS authWS = this.ApxLogin(username, password);
+                this.authWS = this.ApxLogin(username, password);
                 apxws = this.CreateApxWS(authWS);
             }
 
@@ -60,14 +62,24 @@
             {
                 TokenResponse token = this.OidcLogin();
                 apxws = this.CreateApxWS(token.AccessToken);
+                this.authWS = this.CreateAuthenticateWS(token.AccessToken);
             }
             else
             {
-                AuthWS.AuthenticateWS authWS = this.ApxLogin();
+                this.authWS = this.ApxLogin();
                 apxws = this.CreateApxWS(authWS);
             }
 
             return apxws;
+        }
+
+        /// <summary>
+        /// Log out from Apx and end user session
+        /// </summary>
+        /// <returns></returns>
+        public bool Logout()
+        {
+            return this.authWS.Logout();
         }
 
         /// <summary>
@@ -210,6 +222,15 @@
             this.ResolveServiceUrl(apxws);
 
             return apxws;
+        }
+
+        private AuthWS.AuthenticateWS CreateAuthenticateWS(string accessToken)
+        {
+            AuthWS.AuthenticateWS authWS = new AuthWS.AuthenticateWS();
+            authWS.AccessToken = accessToken;
+            authWS.UseDefaultCredentials = false;
+            this.ResolveServiceUrl(authWS);
+            return authWS;
         }
 
         /// <summary>
