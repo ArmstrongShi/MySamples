@@ -1,6 +1,6 @@
 ﻿
-/*
- * To use Token Based Authentication for SOAP API request, you have to add this class to your client code.
+/* To use Token Based Authentication for SOAP API request, 
+ * you must add this class after adding the web reference.
  * The namespance must be same as the namespace of web reference that you added.
  */
 namespace AdvOidcSample.ApxSoap
@@ -26,3 +26,4 @@ namespace AdvOidcSample.ApxSoap
         }
     }
 }
+

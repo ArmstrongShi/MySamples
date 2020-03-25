@@ -118,7 +118,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApxOidcClient.cs" />
+    <Compile Include="AdvOidcClient.cs" />
+    <Compile Include="ApxAuthConfig.cs" />
     <Compile Include="ApxRestClient.cs" />
     <Compile Include="ApxSoapClient.cs" />
     <Compile Include="ApxWS.cs" />

@@ -21,18 +21,6 @@ namespace AdvOidcSample
             }
         }
 
-        public ApxSoapClient(string baseAddress)
-        {
-            this.apxws = new ApxWS();
-            this.apxws.AccessToken = null;
-            this.apxws.UseDefaultCredentials = true;
-            Uri serviceUri = null;
-            if (Uri.TryCreate(new Uri(baseAddress), "apx/services/V2/ApxWS.asmx", out serviceUri))
-            {
-                this.apxws.Url = serviceUri.AbsoluteUri;
-            }
-        }
-
         public void GetContacts()
         {
             Console.WriteLine("===========Start SOAP Request===========");

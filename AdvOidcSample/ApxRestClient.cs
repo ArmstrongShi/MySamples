@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net.Http;
+    using System.Threading.Tasks;
 
     class ApxRestClient
     {
@@ -21,8 +22,8 @@
             string result = null;
             if (Uri.TryCreate(this.client.BaseAddress, relativeUri, out requestUri))
             {
-                HttpResponseMessage response = this.client.GetAsync(requestUri).Result;
-                result = response.Content.ReadAsStringAsync().Result;
+                var response = Task.Run(()=>this.client.GetAsync(requestUri)).Result;
+                result = Task.Run(() => response.Content.ReadAsStringAsync()).Result;
             }
 
             Console.WriteLine(result);

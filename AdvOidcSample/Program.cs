@@ -1,32 +1,21 @@
 ﻿namespace AdvOidcSample
 {
-    using System;
-
     class Program
     {
         static void Main(string[] args)
         {
-            string baseAddress = "http://vmapxba7.gencos.com";
-            var client = new ApxOidcClient
-            {
-                BaseAddress = baseAddress,
-                ClientId = "ro.APXAPIClient",
-                ClientSecret = "advs",
-                Scope = "apxapi offline_access"
-            };
+            string apxBaseUrl = "https://VMW19APXCLOUD05.gencos.com";
+            ApxAuthConfig authConfig = ApxAuthConfig.Create(apxBaseUrl);
+            AdvOidcClient oidcClient = new AdvOidcClient(authConfig.Issuer);
+            var token = oidcClient.Login("web", "advs");
+            //var token = oidcClient.Login();
 
-            var token = client.PasswordLogin("api","advs");
+            ApxRestClient restClient = new ApxRestClient(apxBaseUrl, token.AccessToken);
+            restClient.HttpGet("apxlogin/api/v2/blotters");
+            restClient.HttpGet("apxlogin/api/odata/v1/portfolios");
 
-            //var apxRestClient = new ApxRestClient(baseAddress, token.AccessToken);
-            //apxRestClient.HttpGet("apxlogin/api/odata/v1/portfolios");
-            //apxRestClient.HttpGet("apxlogin/api/v2/blotters");
-
-            var apxSoapClient = new ApxSoapClient(baseAddress, token.AccessToken);
-            //apxSoapClient.GetContacts();
-            apxSoapClient.SetExampleUserEmail();
-
-            Console.WriteLine("Press Enter to continue.");
-            Console.ReadLine();
+            ApxSoapClient soapClient = new ApxSoapClient(apxBaseUrl, token.AccessToken);
+            soapClient.GetContacts();          
         }
     }
 }
