@@ -7,13 +7,14 @@ namespace Advent.ApxSoap
     {
         static void Main(string[] args)
         {
-            AuthClient client = new AuthClient("http://vmapxba9.advent.com");
-            ApxWS.ApxWS apxws = client.Login("api", "advs"); // DB User
+            string apxWebUrl = "https://VMW19APXCLOUD05.GENCOS.COM";
+            AuthClient client = new AuthClient(apxWebUrl);
+            ApxWS.ApxWS apxws = client.Login("web", "advs"); 
             //apxws = client.Login(); // Win NT user
 
             ApxActivity.CreateNewActivity(apxws);
 
-            bool logout = client.Logout();
+            client.Logout();
         }
     }
 }

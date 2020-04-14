@@ -1,12 +1,10 @@
-﻿namespace Advent.ApxSoap.Authentication
+﻿namespace Advent.ApxRest
 {
     using IdentityModel.Client;
     using Newtonsoft.Json;
     using System;
-    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using System.Web.Services.Protocols;
 
     public class AuthenticationConfiguration
     {
@@ -34,13 +32,13 @@
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public ApxWS.ApxWS Login(string username, string password)
+        public ApxWS Login(string username, string password)
         {
-            ApxWS.ApxWS apxws = null;
+            ApxWS apxws = null;
             if (this.authConfig.EnabledTokenBasedAuthentication)
             {
                 this.token = this.RequestToken(username, password);
-                apxws = this.CreateApxWS(token.AccessToken, this.apxWebServerUrl);
+                apxws = CreateApxWS(this.token.AccessToken, this.apxWebServerUrl);                
             }
             else
             {
@@ -54,13 +52,13 @@
         /// Log in as APX Win NT user
         /// </summary>
         /// <returns></returns>
-        public ApxWS.ApxWS Login()
+        public ApxWS Login()
         {
-            ApxWS.ApxWS apxws = null;
+            ApxWS apxws = null;
             if (this.authConfig.EnabledTokenBasedAuthentication)
             {
                 this.token = this.RequestToken();
-                apxws = this.CreateApxWS(token.AccessToken, this.apxWebServerUrl);
+                apxws = CreateApxWS(this.token.AccessToken, this.apxWebServerUrl);
             }
             else
             {
@@ -73,7 +71,6 @@
         /// <summary>
         /// Log out from Apx and end user session
         /// </summary>
-        /// <returns></returns>
         public void Logout()
         {
             HttpClient client = new HttpClient();
@@ -185,15 +182,13 @@
         /// </summary>
         /// <param name="accessToken"></param>
         /// <returns></returns>
-        private ApxWS.ApxWS CreateApxWS(string accessToken,string apxwebUrl)
+        private ApxWS CreateApxWS(string accessToken, string apxwebUrl)
         {
-            ApxWS.ApxWS apxws = new ApxWS.ApxWS();
-            apxws.AccessToken = accessToken;
-            // Now, you can only use apxlogin virtual directory for API access
-            apxws.UseDefaultCredentials = false;
-            apxws.Url = $"{apxwebUrl}/apxlogin/services/V2/ApxWS.asmx";
-            
-            return apxws;
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {accessToken}");
+            client.BaseAddress = new Uri(apxwebUrl);
+            var apxClient = new ApxWS(client);
+            return apxClient;
         }
     }
 }

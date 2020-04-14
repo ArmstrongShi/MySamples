@@ -17,7 +17,7 @@ namespace Advent.ApxSoap.Examples
             email.ActivityTypeID = "Email";
             email._UpdatedFields.ActivityTypeID = true;
 
-            email.OwnerCode = "api";
+            email.OwnerCode = "web";
             email.OwnerCodeIsNull = false;
             email._UpdatedFields.OwnerCode = true;
 

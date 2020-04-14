@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="Authentication\ApxWs.cs" />
     <Compile Include="Authentication\AuthClient.cs" />
-    <Compile Include="Authentication\AuthenticateWS.cs" />
     <Compile Include="Examples\ApxActivity.cs" />
     <Compile Include="Examples\ApxContact.cs" />
     <Compile Include="Program.cs" />
@@ -67,11 +66,6 @@
     </Compile>
     <Compile Include="Examples\ApxUser.cs" />
     <Compile Include="Web References\ApxWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\AuthWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -145,11 +139,6 @@
     <None Include="Web References\ApxWS\UserQueryResult1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AuthWS\AuthenticateWS.wsdl" />
-    <None Include="Web References\AuthWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
@@ -158,17 +147,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://vmapxba8/APX/services/AuthenticateWS.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\AuthWS\</RelPath>
-      <UpdateFromURL>http://vmapxba8/APX/services/AuthenticateWS.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>AuthWS</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="http://vmapxba8/APX/services/V2/ApxWS.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ApxWS\</RelPath>
@@ -185,11 +163,8 @@
     <None Include="Web References\ApxWS\ApxWS.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\AuthWS\AuthenticateWS.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="IdentityModel.OidcClient">
-      <Version>3.1.2</Version>
+    <PackageReference Include="IdentityModel">
+      <Version>4.2.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

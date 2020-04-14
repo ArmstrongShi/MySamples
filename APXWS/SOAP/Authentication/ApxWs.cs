@@ -13,7 +13,7 @@ namespace Advent.ApxSoap.ApxWS
         protected override System.Net.WebRequest GetWebRequest(Uri uri)
         {
             var request = base.GetWebRequest(uri);
-            request.Headers.Add("Authorization", string.Format("Bearer {0}", AccessToken));
+            request.Headers.Add("Authorization", $"Bearer {AccessToken}");
             return request;
         }
     }

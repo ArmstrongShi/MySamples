@@ -5,9 +5,7 @@ VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APXSOAP", "SOAP\APXSOAP.csproj", "{C15C7D62-DFAC-4E54-9F6A-CEED833EA06C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlotterApi", "RESTful\BlotterApi.csproj", "{159212B3-A8E8-4198-9158-87ADE9E3DAA3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternalApi", "InternalApi\InternalApi.csproj", "{35EDD9B9-B7AE-4A9A-A217-875B9812452A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApxREST", "RESTful\ApxREST.csproj", "{159212B3-A8E8-4198-9158-87ADE9E3DAA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,14 +27,6 @@ Global
 		{159212B3-A8E8-4198-9158-87ADE9E3DAA3}.Release|Any CPU.ActiveCfg = Release|x86
 		{159212B3-A8E8-4198-9158-87ADE9E3DAA3}.Release|x86.ActiveCfg = Release|x86
 		{159212B3-A8E8-4198-9158-87ADE9E3DAA3}.Release|x86.Build.0 = Release|x86
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Debug|x86.Build.0 = Debug|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Release|x86.ActiveCfg = Release|Any CPU
-		{35EDD9B9-B7AE-4A9A-A217-875B9812452A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

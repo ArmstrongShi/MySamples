@@ -1,22 +1,19 @@
 ﻿
-namespace Advent.ApxRestApiExample
-{
-    using System;
-    using System.Configuration;
-    using System.IO;
-    using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Json;
-    using System.Text;
-    using System.Collections.Generic;
+using System.Net.Http;
 
+namespace Advent.ApxRest
+{
     class Program
     {
         static void Main(string[] args)
         {
-            using (ApxInternalApiProxy proxy = new ApxInternalApiProxy("https://vmw16apxcloud01.gencos.com", "admin", "advs"))
-            {
-                var result = proxy.GetUserInfo();
-            }
+            string apxWebUrl = "https://VMW19APXCLOUD05.GENCOS.COM";
+            AuthClient client = new AuthClient(apxWebUrl);
+            ApxWS apxws = client.Login("web", "advs");
+            //apxws = client.Login(); // Win NT user
+            string json = apxws.GetBlotters();
+
+            client.Logout();
         }
     }
 }
