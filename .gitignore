@@ -38,3 +38,6 @@
 /AdvOidcSample/Web References/com.advent.vmapxba9
 /APXWS/packages
 /APXWS/SOAP/obj
+/APXWS/RESTful/packages
+/APXWS/RESTful/.vs/ApxREST/v15/Server/sqlite3
+/APXWS/SOAP/.vs/ApxSOAP/v15
