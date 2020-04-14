@@ -121,7 +121,7 @@ function ShowParameterInputDialog()
 	$bakButton.Location = New-Object System.Drawing.Size(440,$bakPos)
 	$bakButton.Size = New-Object System.Drawing.Size(70,20)
 	$bakButton.Text = "Restore"
-	$bakButton.Add_Click({RestoreApxFirm $bakTextBox.Text})
+	$bakButton.Add_Click({RestoreApxDatabases $bakTextBox.Text})
 	$apxGroup.Controls.Add($bakButton)
 		
 
@@ -138,12 +138,12 @@ function ShowParameterInputDialog()
 	$dbTextBox.Text = $_hostname
 	$apxGroup.Controls.Add($dbTextBox)
 
-	$dbDelButton = New-Object System.Windows.Forms.Button
-	$dbDelButton.Location = New-Object System.Drawing.Size(440,$dbpos)
-	$dbDelButton.Size = New-Object System.Drawing.Size(70,20)
-	$dbDelButton.Text = "Remove"
-	$dbDelButton.Add_Click({RemoveApxDatabase})
-	$apxGroup.Controls.Add($dbDelButton)
+	$dbDropButton = New-Object System.Windows.Forms.Button
+	$dbDropButton.Location = New-Object System.Drawing.Size(440,$dbpos)
+	$dbDropButton.Size = New-Object System.Drawing.Size(70,20)
+	$dbDropButton.Text = "Drop"
+	$dbDropButton.Add_Click({DropApxDatabases})
+	$apxGroup.Controls.Add($dbDropButton)
 	
     $appPos = $dbpos + 30
 
@@ -193,14 +193,14 @@ function ShowParameterInputDialog()
 	$installButton.Location = New-Object System.Drawing.Point(330,$btnPos)
 	$installButton.Size = New-Object System.Drawing.Size(80,20)
 	$installButton.Text = "Install"
-	$installButton.Add_Click({InstallButtonClick $buildComboBox.Text $xmlComboBox.Text $dbTextBox.Text $appTextBox.Text $webTextBox.Text $siteComboBox.Text $idsTextBox.Text $bakTextBox.Text})
+	$installButton.Add_Click({InstallApxServerClick $buildComboBox.Text $xmlComboBox.Text $dbTextBox.Text $appTextBox.Text $webTextBox.Text $siteComboBox.Text $idsTextBox.Text $bakTextBox.Text})
 	$apxGroup.Controls.Add($installButton)
 
 	$removeButton = New-Object System.Windows.Forms.Button
 	$removeButton.Location = New-Object System.Drawing.Point(430,$btnPos)
 	$removeButton.Size = New-Object System.Drawing.Size(80,20)
-	$removeButton.Text = "Remove"
-	$removeButton.Add_Click({RemoveButtonClick $buildComboBox.Text})
+	$removeButton.Text = "Uninstall"
+	$removeButton.Add_Click({UninstallApxServerClick $buildComboBox.Text})
 	$apxGroup.Controls.Add($removeButton) 
 
     $ngPos = $apxPos +$apxSize+ 10
@@ -208,8 +208,7 @@ function ShowParameterInputDialog()
     $ngGroup = New-Object System.Windows.Forms.GroupBox
     $ngGroup.Location = New-Object System.Drawing.Point(10,$ngPos) 
 	$ngGroup.Size = New-Object System.Drawing.Point(530,$ngSize) 
-    $ngGroup.Text = "APX New UI"
-    #$ngGroup.Enabled = $false
+    $ngGroup.Text = "APX Nextgen"
     $objForm.Controls.Add($ngGroup)
 
     $ngbuildPos = 20
@@ -233,16 +232,17 @@ function ShowParameterInputDialog()
 	$nginstallButton.Location = New-Object System.Drawing.Point(330,$ngbtnPos)
 	$nginstallButton.Size = New-Object System.Drawing.Size(80,20)
 	$nginstallButton.Text = "Install"
-	$nginstallButton.Add_Click({InstallApxUI $ngComboBox.Text $webTextBox.Text })
+	$nginstallButton.Add_Click({InstallApxNextgen $ngComboBox.Text $webTextBox.Text })
 	$ngGroup.Controls.Add($nginstallButton)
 
 	$ngremoveButton = New-Object System.Windows.Forms.Button
 	$ngremoveButton.Location = New-Object System.Drawing.Point(430,$ngbtnPos)
 	$ngremoveButton.Size = New-Object System.Drawing.Size(80,20)
-	$ngremoveButton.Text = "Remove"
-	$ngremoveButton.Add_Click({UninstallAPXUI})
+	$ngremoveButton.Text = "Uninstall"
+	$ngremoveButton.Add_Click({UninstallApxNextgen})
 	$ngGroup.Controls.Add($ngremoveButton) 
 
+$ngSize = $ngbtnPos + 30
     $height = $ngPos +$ngsize+ 50
 	$objForm.Size = New-Object System.Drawing.Size(570,$height)
 	$objForm.Add_Shown({$objForm.Activate()})
@@ -250,10 +250,9 @@ function ShowParameterInputDialog()
 }
 
 
-function InstallButtonClick($build,$xmlTemp,$db,$app,$web,$site,$ids)
+function InstallApxServerClick($build,$xmlTemp,$db,$app,$web,$site,$ids)
 {
-    $xmlPath = PrepareInstallXml $xmlTemp $db $app $web $site $ids
-	#$setup= $build+'\ApxServer\Setup.exe'
+    $xmlPath = PrepareApxServerInstallXml $xmlTemp $db $app $web $site $ids
     $setup= Join-Path -Path $build -ChildPath 'ApxServer\Setup.exe'
 	if((test-path $setup))
 	{
@@ -279,26 +278,25 @@ function InstallButtonClick($build,$xmlTemp,$db,$app,$web,$site,$ids)
 	}
 }
 
-function RemoveButtonClick($build)
+function UninstallApxServerClick($build)
 {
-	#$setup= $build+'\ApxServer\Setup.exe'
     $setup= Join-Path -Path $build -ChildPath 'ApxServer\Setup.exe'
 	if(test-path $setup)
 	{
         $ver = GetInstalledVersion
         if ($ver -ne $null)
         {
-            $msg = 'Uninstall APX '+$ver+'?'
+            $msg = 'Uninstall APX Server {0}?' -f $ver
 		    $result=[System.Windows.Forms.MessageBox]::Show($msg,'Question',[System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Question)
 		    if($result -eq [System.Windows.Forms.DialogResult]::Yes)
 		    {
-			    RemoveApxServer $setup
-				RemoveApxDatabase				
+			    UninstallApxServer $setup
+				DropApxDatabases				
 			}
         }
         else
         {
-            $msg='Apx is not installed'
+            $msg='Apx Server is not installed.'
 		    [System.Windows.Forms.MessageBox]::Show($msg,'Info',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
         }
 	}
@@ -328,7 +326,7 @@ function GetInstalledVersion()
 }
 
 
-function RestoreApxFirm($bakPath)
+function RestoreApxDatabases($bakPath)
 {
     $ver = GetInstalledVersion
     if ($ver -ne $null)
@@ -344,7 +342,6 @@ function RestoreApxFirm($bakPath)
 			[System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
 			
             $sqlDataPath= (Get-ItemPropertyValue -Path HKLM:\SOFTWARE\Microsoft\MSSQLServer\Setup -Name sqlpath) + '\data'    
-            #If (Test-Path "$bakPath\ApxFirm.bak")
             if (Test-Path (Join-Path -Path $bakpath -ChildPath 'ApxFirm.bak'))
             {   
                 $query = "RESTORE DATABASE [ApxFirm] 
@@ -360,7 +357,7 @@ function RestoreApxFirm($bakPath)
                     NOUNLOAD, REPLACE, STATS = 10"
                 invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
             }
-            #If (Test-Path "$bakPath\ApxFirm_Archive.bak")
+            
             if (Test-Path (Join-Path -Path $bakpath -ChildPath 'ApxFirm_Archive.bak'))
             {
                 $query = "RESTORE DATABASE [ApxFirm_Archive] 
@@ -372,7 +369,7 @@ function RestoreApxFirm($bakPath)
                     NOUNLOAD,  REPLACE, STATS = 10"
                 invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 300
             }
-            #If (Test-Path "$bakPath\APXFirm_Doc.bak")
+            
             if (Test-Path (Join-Path -Path $bakpath -ChildPath 'APXFirm_Doc.bak'))
             {   
                 $query = "RESTORE DATABASE [APXFirm_Doc] 
@@ -385,7 +382,7 @@ function RestoreApxFirm($bakPath)
                 invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 300
             }
 
-            $msg='ApxFirm databases are restored!'
+            $msg='Apx databases are restored!'
 		    [System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
         }        
         else
@@ -396,7 +393,7 @@ function RestoreApxFirm($bakPath)
     }
 }
 
-function PrepareInstallXml($xmlpath, $dbserver, $appserver, $webserver, $site,$idsAuthority)
+function PrepareApxServerInstallXml($xmlpath, $dbserver, $appserver, $webserver, $site,$idsAuthority)
 {
     if(($xmlpath -ne $null) -and (test-path $xmlpath))
     {
@@ -429,7 +426,7 @@ function InstallApxServer($setup,$xmpPath)
 	return $true
 }
 
-function RemoveApxServer($setup)
+function UninstallApxServer($setup)
 {
 	Stop-Process -name iexplore -force -ErrorAction SilentlyContinue
 	StopApxServices
@@ -442,7 +439,7 @@ function DropDatabase($database)
 	invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
 }
 
-function RemoveApxDatabase()
+function DropApxDatabases()
 {
 	$ver = GetInstalledVersion
 	if ($ver -eq $null)
@@ -470,10 +467,19 @@ function RemoveApxDatabase()
 
 function ResetAdminPassword()
 {
-	 $query = "USE [APXFirm] DECLARE @NewPassword varchar(100) SET @NewPassword = 'advs' DECLARE @NewPasswordEncrypted varbinary(260) 
-         EXEC master.dbo.xp_AdvPasswordEncrypt 'Rio.1', @NewPassword, @NewPasswordEncrypted output 
-         SELECT @NewPasswordEncrypted begin transaction EXEC pAdvAuditEventBegin @userID = -1001, @functionID=24 
-         UPDATE AOUser SET EncryptedPassword = @NewPasswordEncrypted WHERE userid not in (-1005,-41,-24) EXEC pAdvAuditEventEnd commit transaction"
+	 $query = "IF (EXISTS (SELECT * FROM master.dbo.sysdatabases WHERE name='APXFirm')) 
+		BEGIN
+			DECLARE @NewPassword varchar(100) 
+			SET @NewPassword = 'advs' 
+			DECLARE @NewPasswordEncrypted varbinary(260) 
+			EXEC master.dbo.xp_AdvPasswordEncrypt 'Rio.1', @NewPassword, @NewPasswordEncrypted output 
+			SELECT @NewPasswordEncrypted 
+			BEGIN TRANSACTION 
+			EXEC APXFirm.dbo.pAdvAuditEventBegin @userID = -1001, @functionID=24 
+			UPDATE APXFirm.dbo.AOUser SET EncryptedPassword = @NewPasswordEncrypted WHERE userid not in (-1005,-41,-24) 
+			EXEC APXFirm.dbo.pAdvAuditEventEnd 
+			COMMIT TRANSACTION
+		END"
 
      invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
 }
@@ -546,7 +552,7 @@ function InstallApxClient($appServer,$webBaseUrl)
 	}
 }
 
-function InstallApxUI($buildPath,$apiUrl)
+function InstallApxNextgen($buildPath,$apiUrl)
 {	
 	$msiPath = join-path -Path $buildPath -ChildPath 'APXNextgenSetup.msi'
 	if(test-path -Path $msiPath)
@@ -554,7 +560,8 @@ function InstallApxUI($buildPath,$apiUrl)
         $installFolder=Join-Path -Path ${env:ProgramFiles(x86)} -ChildPath 'Advent\APX\APXUI'
         $logfile=Join-Path -Path $installFolder -ChildPath 'UI_install.log'
 		$scriptBlock='msiexec /i {0} /qr WEBSITENAME="Default Web Site" APX_API_URL="{1}" INSTALLFOLDER="{2}" Ids_Username="admin" Ids_Password="advs"' -f $msiPath,$apiUrl,$installFolder
-		InvokeCommand $scriptBlock
+		
+		Invoke-Command -ScriptBlock { & cmd /c $scriptBlock}
 	}
 	else
 	{
@@ -563,14 +570,9 @@ function InstallApxUI($buildPath,$apiUrl)
 	}
 }
 
-function UninstallAPXUI()
+function UninstallApxNextgen()
 {
-	InvokeCommand 'msiexec /x {e5df4831-2502-4a20-ae3b-4e45dc134bc3} /qb'
-}
-
-function InvokeCommand ($scriptBlock) 
-{
-	Stop-Process -name iexplore -force -ErrorAction SilentlyContinue
+	$scriptBlock='msiexec /x {e5df4831-2502-4a20-ae3b-4e45dc134bc3} /qb'
 	Invoke-Command -ScriptBlock { & cmd /c $scriptBlock}
 }
 
