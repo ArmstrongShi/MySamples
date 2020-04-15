@@ -7,7 +7,7 @@ namespace Advent.ApxSoap
     {
         static void Main(string[] args)
         {
-            string apxWebUrl = "https://VMW19APXCLOUD05.GENCOS.COM";
+            string apxWebUrl = "https://apx.company.com";
             AuthClient client = new AuthClient(apxWebUrl);
             ApxWS.ApxWS apxws = client.Login("web", "advs"); 
             //apxws = client.Login(); // Win NT user
