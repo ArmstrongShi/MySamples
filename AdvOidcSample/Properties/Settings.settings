@@ -1,9 +1,0 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AdvOidcSample.Properties" GeneratedClassName="Settings">
-  <Profiles />
-  <Settings>
-    <Setting Name="AdvOidcSample_ApxSoap_ApxWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://apx.advent.com/apxlogin/services/V2/ApxWS.asmx</Value>
-    </Setting>
-  </Settings>
-</SettingsFile>
