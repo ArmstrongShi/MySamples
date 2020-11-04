@@ -77,7 +77,7 @@
         public void Logout()
         {
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Authorization", $"Berear {this.token.AccessToken}");
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {this.token.AccessToken}");
             string requestUrl = $"{this.apxWebServerUrl}/apxlogin/api/odata/EndSession";
             var response = Task.Run(() => client.GetAsync(requestUrl)).Result;
             response.EnsureSuccessStatusCode();
