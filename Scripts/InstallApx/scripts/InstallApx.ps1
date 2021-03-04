@@ -3,9 +3,9 @@ $_xmltemplate='{0}\ApxServerInstall_*.xml' -f ${env:temp}
 $_backupDir='{0}\backup' -f ${env:systemdrive}
 $_sys = get-wmiobject win32_computersystem
 $_hostname = '{0}.{1}' -f $_sys.Name,$_sys.Domain
-$_webBaseUrl = 'http://{0}'-f $_hostname
-$_idsBaseUrl = 'http://{0}/oauth' -f $_hostname
-$_apxQAImg ='\\source.advent.com\Img\qaimg\APX\APXSetup\20_10_0_*'
+$_webBaseUrl = 'https://{0}'-f $_hostname
+$_idsBaseUrl = 'https://{0}/oauth' -f $_hostname
+$_apxQAImg ='\\source.advent.com\Img\qaimg\APX\APXSetup\*_*_*_*'
 $_apxImg ='\\source.advent.com\Img\img\APX\APXSetup\*_*_*_*'
 $_uiQAImg='\\source.advent.com\Img\qaimg\APX\APXNextgen\*_*_*_*'
 
@@ -99,11 +99,12 @@ function ShowParameterInputDialog()
     $buildComboBox.location = New-Object System.Drawing.Point(70,$buildPos)
     $buildComboBox.Size = New-Object System.Drawing.Size(350,20)
     Get-ChildItem -Path $_apxQAImg -Directory | Sort-Object LastWriteTime -Descending | Where-Object {-not (test-path (Join-Path -Path $_.FullName -ChildPath 'By_Manual.txt'))} | Select-Object -First 5 | ForEach-Object -Process { $buildComboBox.Items.Add($_.FullName)}
+	$buildComboBox.Items.Add('=======================================================')
     Get-ChildItem -Path $_apxImg -Directory | Sort-Object LastWriteTime  -Descending | Where-Object {-not $_.FullName.Contains('DoNotUse')} | Select-Object -First 5 | ForEach-Object -Process { $buildComboBox.Items.Add($_.FullName) }
     $buildComboBox.SelectedIndex = 0
     $apxGroup.Controls.Add($buildComboBox)
 
-    $bakPos = $buildPos + 30
+    $bakPos = $buildPos <#+ 30
 	
 	$bakLabel = New-Object System.Windows.Forms.Label
 	$bakLabel.Location = New-Object System.Drawing.Point(10,$bakPos) 
@@ -123,7 +124,7 @@ function ShowParameterInputDialog()
 	$bakButton.Text = "Restore"
 	$bakButton.Add_Click({RestoreApxDatabases $bakTextBox.Text})
 	$apxGroup.Controls.Add($bakButton)
-		
+	#>
 
     $dbpos = $bakPos + 30
 	$dbLabel = New-Object System.Windows.Forms.Label
@@ -325,7 +326,7 @@ function GetInstalledVersion()
     return $null
 }
 
-
+<#
 function RestoreApxDatabases($bakPath)
 {
     $ver = GetInstalledVersion
@@ -392,7 +393,7 @@ function RestoreApxDatabases($bakPath)
         }
     }
 }
-
+#>
 function PrepareApxServerInstallXml($xmlpath, $dbserver, $appserver, $webserver, $site,$idsAuthority)
 {
     if(($xmlpath -ne $null) -and (test-path $xmlpath))
@@ -422,7 +423,7 @@ function InstallApxServer($setup,$xmpPath)
     $arg='/z"SuppressDialogs:;InstallXml:\"{0}""' -f $xmpPath
 	Start-Process -FilePath $setup -ArgumentList $arg -Verb 'runas' -Wait
 	StartApxServices
-    ResetAdminPassword
+    ResetUserPasswords
 	return $true
 }
 
@@ -465,15 +466,13 @@ function DropApxDatabases()
 	}
 }
 
-function ResetAdminPassword()
+function ResetUserPasswords()
 {
 	 $query = "IF (EXISTS (SELECT * FROM master.dbo.sysdatabases WHERE name='APXFirm')) 
 		BEGIN
-			DECLARE @NewPassword varchar(100) 
-			SET @NewPassword = 'advs' 
+			DECLARE @NewPassword varchar(100) = 'advs'
 			DECLARE @NewPasswordEncrypted varbinary(260) 
 			EXEC master.dbo.xp_AdvPasswordEncrypt 'Rio.1', @NewPassword, @NewPasswordEncrypted output 
-			SELECT @NewPasswordEncrypted 
 			BEGIN TRANSACTION 
 			EXEC APXFirm.dbo.pAdvAuditEventBegin @userID = -1001, @functionID=24 
 			UPDATE APXFirm.dbo.AOUser SET EncryptedPassword = @NewPasswordEncrypted WHERE userid not in (-1005,-41,-24) 
