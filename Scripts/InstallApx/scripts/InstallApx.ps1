@@ -1,6 +1,6 @@
 
 $_xmltemplate='{0}\ApxServerInstall_*.xml' -f ${env:temp}
-$_backupDir='{0}\backup' -f ${env:systemdrive}
+$_backupDir='{0}\backup\apxfirm' -f ${env:systemdrive}
 $_sys = get-wmiobject win32_computersystem
 $_hostname = '{0}.{1}' -f $_sys.Name,$_sys.Domain
 $_webBaseUrl = 'https://{0}'-f $_hostname
@@ -104,7 +104,7 @@ function ShowParameterInputDialog()
     $buildComboBox.SelectedIndex = 0
     $apxGroup.Controls.Add($buildComboBox)
 
-    $bakPos = $buildPos <#+ 30
+    $bakPos = $buildPos + 30
 	
 	$bakLabel = New-Object System.Windows.Forms.Label
 	$bakLabel.Location = New-Object System.Drawing.Point(10,$bakPos) 
@@ -122,9 +122,9 @@ function ShowParameterInputDialog()
 	$bakButton.Location = New-Object System.Drawing.Size(440,$bakPos)
 	$bakButton.Size = New-Object System.Drawing.Size(70,20)
 	$bakButton.Text = "Restore"
-	$bakButton.Add_Click({RestoreApxDatabases $bakTextBox.Text})
+	$bakButton.Add_Click({RestoreApxDatabasesClick $bakTextBox.Text})
 	$apxGroup.Controls.Add($bakButton)
-	#>
+	
 
     $dbpos = $bakPos + 30
 	$dbLabel = New-Object System.Windows.Forms.Label
@@ -243,7 +243,7 @@ function ShowParameterInputDialog()
 	$ngremoveButton.Add_Click({UninstallApxNextgen})
 	$ngGroup.Controls.Add($ngremoveButton) 
 
-$ngSize = $ngbtnPos + 30
+	$ngSize = $ngbtnPos + 30
     $height = $ngPos +$ngsize+ 50
 	$objForm.Size = New-Object System.Drawing.Size(570,$height)
 	$objForm.Add_Shown({$objForm.Activate()})
@@ -251,20 +251,21 @@ $ngSize = $ngbtnPos + 30
 }
 
 
-function InstallApxServerClick($build,$xmlTemp,$db,$app,$web,$site,$ids)
-{
-    $xmlPath = PrepareApxServerInstallXml $xmlTemp $db $app $web $site $ids
+function InstallApxServerClick($build,$xmlTemp,$db,$app,$web,$site,$ids,$bakpath)
+{    
+	write-host 'Start: Install Apx server.' -ForegroundColor Green
     $setup= Join-Path -Path $build -ChildPath 'ApxServer\Setup.exe'
 	if((test-path $setup))
 	{
         $ver = GetInstalledVersion
         if ($ver -ne $null)
         {
-            $msg = 'APX '+$ver+' is installed. Remove it first! '
-            [System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+            ShowVersionWarning($ver)
         }
         else
-        {
+        {			
+			$xmlPath = PrepareApxServerInstallXml $xmlTemp $db $app $web $site $ids
+			
             $success = InstallApxServer $setup $xmlPath
 		    if($success)
 		    {	
@@ -274,13 +275,14 @@ function InstallApxServerClick($build,$xmlTemp,$db,$app,$web,$site,$ids)
 	}
 	else
 	{
-		$msg='Not found: '+$setup
-		[System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+		ShowNotFoundError($setup)
 	}
+	write-host 'End: Install Apx server.' -ForegroundColor Green
 }
 
 function UninstallApxServerClick($build)
 {
+	write-host 'Start: Uninstall Apx server.' -ForegroundColor Green
     $setup= Join-Path -Path $build -ChildPath 'ApxServer\Setup.exe'
 	if(test-path $setup)
 	{
@@ -288,8 +290,8 @@ function UninstallApxServerClick($build)
         if ($ver -ne $null)
         {
             $msg = 'Uninstall APX Server {0}?' -f $ver
-		    $result=[System.Windows.Forms.MessageBox]::Show($msg,'Question',[System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Question)
-		    if($result -eq [System.Windows.Forms.DialogResult]::Yes)
+			$result = ShowYesNo($msg)
+			if($result -eq $true)
 		    {
 			    UninstallApxServer $setup
 				DropApxDatabases				
@@ -297,15 +299,14 @@ function UninstallApxServerClick($build)
         }
         else
         {
-            $msg='Apx Server is not installed.'
-		    [System.Windows.Forms.MessageBox]::Show($msg,'Info',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+			write-host 'Apx Server is not installed.' -ForegroundColor Yellow
         }
 	}
 	else
 	{
-		$msg='Not found: ' + $setup
-		[System.Windows.Forms.MessageBox]::Show($msg,'Error',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+		ShowNotFoundError($setup)
 	}
+	write-host 'End: Uninstall Apx server.' -ForegroundColor Green
 }
 
 function GetInstalledVersion()
@@ -320,80 +321,80 @@ function GetInstalledVersion()
 		}
 		catch
 		{
+			write-host 'Version registry key or value is not found.'
 			return $null
 		}        
     }
     return $null
 }
 
-<#
-function RestoreApxDatabases($bakPath)
+function RestoreApxDatabasesClick($bakPath)
 {
+	write-host 'Start: Restoring Apx databases.' -ForegroundColor Green
     $ver = GetInstalledVersion
     if ($ver -ne $null)
     {
-        $msg = 'APX '+$ver+' is installed. Remove it first! '
-        [System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+        ShowVersionWarning($ver)
     }
     else
     {
         if(Test-Path $bakpath)
         {
-			$msg = 'Start to restore APXFirm databases.'
-			[System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
 			
-            $sqlDataPath= (Get-ItemPropertyValue -Path HKLM:\SOFTWARE\Microsoft\MSSQLServer\Setup -Name sqlpath) + '\data'    
-            if (Test-Path (Join-Path -Path $bakpath -ChildPath 'ApxFirm.bak'))
-            {   
-                $query = "RESTORE DATABASE [ApxFirm] 
-                    FILE = N'FirmSys',  
-                    FILE = N'FirmData',  
-                    FILE = N'FirmIx' 
-                    FROM  DISK = N'$bakpath\ApxFirm.bak' 
-                    WITH  FILE = 1,  
-                    MOVE N'FirmSys' TO N'$sqlDataPath\ApxFirm.mdf',  
-                    MOVE N'FirmData' TO N'$sqlDataPath\ApxFirm_0.ndf',  
-                    MOVE N'FirmIx' TO N'$sqlDataPath\ApxFirm_1.ndf',  
-                    MOVE N'FirmLog' TO N'$sqlDataPath\ApxFirm_2.ldf',  
-                    NOUNLOAD, REPLACE, STATS = 10"
-                invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
-            }
-            
-            if (Test-Path (Join-Path -Path $bakpath -ChildPath 'ApxFirm_Archive.bak'))
-            {
-                $query = "RESTORE DATABASE [ApxFirm_Archive] 
-                    FILE = N'FirmArchSys' 
-                    FROM  DISK = N'$bakpath\ApxFirm_Archive.bak' 
-                    WITH  FILE = 1,  
-                    MOVE N'FirmArchSys' TO N'$sqlDataPath\ApxFirm_Archive.mdf',  
-                    MOVE N'FirmArchLog' TO N'$sqlDataPath\ApxFirm_Archive_0.ldf',  
-                    NOUNLOAD,  REPLACE, STATS = 10"
-                invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 300
-            }
-            
-            if (Test-Path (Join-Path -Path $bakpath -ChildPath 'APXFirm_Doc.bak'))
-            {   
-                $query = "RESTORE DATABASE [APXFirm_Doc] 
-                    FILE = N'FirmDocSys' 
-                    FROM  DISK = N'$bakpath\APXFirm_Doc.bak' 
-                    WITH  FILE = 1, 
-                    MOVE N'FirmDocSys' TO N'$sqlDataPath\APXFirm_Doc.mdf', 
-                    MOVE N'FirmDocLog' TO N'$sqlDataPath\APXFirm_Doc_0.ldf',
-                    NOUNLOAD,  REPLACE, STATS = 10"
-                invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 300
-            }
-
-            $msg='Apx databases are restored!'
-		    [System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+            RestoreApxDatabases $bakpath
         }        
         else
         {
-            $msg='Not found: ' + $bakPath
-		    [System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+			ShowNotFoundError($bakPath)
         }
     }
+	write-host 'End: Restoring Apx databases. ' -ForegroundColor Green
 }
-#>
+
+function RestoreApxDatabases($bakPath)
+{
+	if(Test-Path $bakpath)
+	{
+		$sqlDataPath= (Get-ItemPropertyValue -Path HKLM:\SOFTWARE\Microsoft\MSSQLServer\Setup -Name sqlpath) + '\data'    
+		if (Test-Path (Join-Path -Path $bakpath -ChildPath 'ApxFirm.bak'))
+		{   
+			$query = "RESTORE DATABASE [ApxFirm] FROM  DISK = N'$bakpath\ApxFirm.bak' WITH  FILE = 1, NOUNLOAD, REPLACE, STATS = 10"
+			invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
+			write-host 'ApxFirm.bak is restored.'
+		}
+		else
+		{
+			ShowNotFoundError('ApxFirm.bak')
+		}
+		
+		if (Test-Path (Join-Path -Path $bakpath -ChildPath 'ApxFirm_Archive.bak'))
+		{
+			$query = "RESTORE DATABASE [ApxFirm_Archive] FROM  DISK = N'$bakpath\ApxFirm_Archive.bak' WITH  FILE = 1, NOUNLOAD,  REPLACE, STATS = 10"
+			invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 300
+			write-host 'ApxFirm_Archive.bak is restored.'
+		}
+		else
+		{
+			ShowNotFoundError('ApxFirm_Archive.bak')
+		}
+		
+		if (Test-Path (Join-Path -Path $bakpath -ChildPath 'APXFirm_Doc.bak'))
+		{   
+			$query = "RESTORE DATABASE [APXFirm_Doc] FROM  DISK = N'$bakpath\APXFirm_Doc.bak' WITH  FILE = 1, NOUNLOAD,  REPLACE, STATS = 10"
+			invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 300
+			write-host 'APXFirm_Doc.bak is restored.'
+		}
+		else
+		{
+			ShowNotFoundError('APXFirm_Doc.bak')
+		}
+	}
+	else
+	{
+		ShowNotFoundError($bakPath)
+	}
+}
+
 function PrepareApxServerInstallXml($xmlpath, $dbserver, $appserver, $webserver, $site,$idsAuthority)
 {
     if(($xmlpath -ne $null) -and (test-path $xmlpath))
@@ -412,25 +413,31 @@ function PrepareApxServerInstallXml($xmlpath, $dbserver, $appserver, $webserver,
     }
     else
     {
-        $msg='Not found: {0}' -f $xmlpath
-		[System.Windows.Forms.MessageBox]::Show($msg,'',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+		ShowNotFoundError($xmlpath)
     }
 }
 
 function InstallApxServer($setup,$xmpPath)
 {
 	RemoveInstallShield
+	
+	write-host 'Installing Apx server.'
     $arg='/z"SuppressDialogs:;InstallXml:\"{0}""' -f $xmpPath
 	Start-Process -FilePath $setup -ArgumentList $arg -Verb 'runas' -Wait
+	
+	write-host 'Starting Apx services.'
 	StartApxServices
+	
+	write-host 'Setting user passwords'
     ResetUserPasswords
 	return $true
 }
 
 function UninstallApxServer($setup)
 {
-	Stop-Process -name iexplore -force -ErrorAction SilentlyContinue
+	write-host 'Stopping Apx services.'
 	StopApxServices
+	write-host 'Uninstalling Apx server.'
 	Start-Process -FilePath $setup -ArgumentList '/Remove' -Wait
 }
 
@@ -438,15 +445,17 @@ function DropDatabase($database)
 {
 	$query = "IF DB_ID('{0}') IS NOT NULL ALTER DATABASE [{0}] SET ONLINE, SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE IF EXISTS [{0}];" -f $database
 	invoke-sqlcmd -Username 'sa' -Password 'Advent.sa' -Query $query -QueryTimeout 600
+	write-host ($database, 'is dropped.')
 }
 
 function DropApxDatabases()
 {
+	write-host ('Start: dropping APX databases') -ForegroundColor Green
 	$ver = GetInstalledVersion
 	if ($ver -eq $null)
 	{ 
-		$result=[System.Windows.Forms.MessageBox]::Show('Remove APX Databases?','Question',[System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Question)
-		if($result -eq [System.Windows.Forms.DialogResult]::Yes)
+		$result = ShowYesNo('Drop APX Databases?')
+		if($result -eq $true)
 		{
 			DropDatabase 'APXController'
 			DropDatabase 'APXController_Archive'
@@ -456,14 +465,34 @@ function DropApxDatabases()
 			DropDatabase 'APXFirm_Temp'
 			DropDatabase 'MDM'
 			DropDatabase 'AdventIdentityServices'
-
-			[System.Windows.Forms.MessageBox]::Show('APX Databases are removed!','',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
 		}
 	}
 	else
 	{
-		[System.Windows.Forms.MessageBox]::Show('Uninstall APX first!','Info',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information)
+		ShowVersionWarning($ver)
 	}
+	write-host ('End: dropping APX databases') -ForegroundColor Green
+}
+
+function ShowVersionWarning($ver)
+{
+	write-host ($ver, 'is installed. You must uninstall it first!') -ForegroundColor Yellow
+}
+
+function ShowNotFoundError($path)
+{
+	write-host ($path, 'is not found.') -ForegroundColor Red
+}
+
+function ShowYesNo($msg)
+{
+	$result = [System.Windows.Forms.MessageBox]::Show($msg,'Question',[System.Windows.Forms.MessageBoxButtons]::YesNo, [System.Windows.Forms.MessageBoxIcon]::Question)
+	if($result -eq [System.Windows.Forms.DialogResult]::Yes)
+	{
+		return $true
+	}
+	
+	return $false
 }
 
 function ResetUserPasswords()
@@ -485,7 +514,9 @@ function ResetUserPasswords()
 
 function StopApxServices()
 {
-	Start-Process powershell -Verb runAs -Wait -ArgumentList 'Stop-Service QubeServer -Force -ErrorAction SilentlyContinue;
+	Start-Process powershell -Verb runAs -Wait -ArgumentList 'Stop-Process -name AdvApplicationServer -force -ErrorAction SilentlyContinue;
+	Stop-Process -name iexplore -force -ErrorAction SilentlyContinue;
+	Stop-Service QubeServer -Force -ErrorAction SilentlyContinue;
 	Stop-Service AdvApplicationServer -Force -ErrorAction SilentlyContinue;
 	Stop-Service APXMsgManager -Force -ErrorAction SilentlyContinue;
 	Stop-Service ApxWatcher -Force -ErrorAction SilentlyContinue;
@@ -494,13 +525,17 @@ function StopApxServices()
 	Stop-Service MDME -Force -ErrorAction SilentlyContinue;
 	Stop-Service APXExchangeSync -Force -ErrorAction SilentlyContinue;
 	Stop-Service APXExchangeData -Force -ErrorAction SilentlyContinue;
-	Stop-Service AdventIdentityServer -ErrorAction SilentlyContinue;
-	Stop-Process -name iexplore -force -ErrorAction SilentlyContinue'
+	Stop-Service AdventIdentityServer -Force -ErrorAction SilentlyContinue;
+	Stop-Service AdventTraefik -Force -ErrorAction SilentlyContinue;
+	Stop-Service AdventConsul -Force -ErrorAction SilentlyContinue;
+	Stop-Service RepToJsonService -Force -ErrorAction SilentlyContinue'
 }
 
 function StartApxServices()
 {
-	Start-Process powershell -Verb runAs -Wait -ArgumentList 'Start-Service QubeServer -ErrorAction SilentlyContinue;
+	Start-Process powershell -Verb runAs -Wait -ArgumentList 'Start-Service AdventConsul -ErrorAction SilentlyContinue;
+	Start-Service AdventTraefik -ErrorAction SilentlyContinue;
+	Start-Service QubeServer -ErrorAction SilentlyContinue;
 	Start-Service AdvApplicationServer -ErrorAction SilentlyContinue;
 	Start-Service APXMsgManager -ErrorAction SilentlyContinue;
 	Start-Service ApxWatcher -ErrorAction SilentlyContinue;
@@ -509,6 +544,7 @@ function StartApxServices()
 	Start-Service MDME -ErrorAction SilentlyContinue;
 	Start-Service APXExchangeSync -ErrorAction SilentlyContinue;
 	Start-Service APXExchangeData -ErrorAction SilentlyContinue;
+	Start-Service RepToJsonService -ErrorAction SilentlyContinue;
 	Start-Service AdventIdentityServer -ErrorAction SilentlyContinue'
 }
 
@@ -517,6 +553,7 @@ function RemoveInstallShield()
 	$path= Join-Path -Path ${Env:ProgramFiles(x86)} -ChildPath 'InstallShield Installation Information\{DF6FC27D-3D51-40AF-94EF-CFF2322B702C}'
 	if(test-path -Path $path)
 	{
+		write-host 'Removing InstallShield registry.'
 		remove-item -Path $path -Recurse -Force
 	}
 }
@@ -535,19 +572,21 @@ function InstallApxClient($appServer,$webBaseUrl)
 	
 	if(test-path -Path $msiPath)
 	{
+		write-host 'Klling iexplore process.'
+		Stop-Process -name iexplore -force -ErrorAction SilentlyContinue
+		
+		write-host 'Installing ApxClient'
 		$installDir=Join-Path -Path ${env:ProgramFiles(x86)} -ChildPath 'Advent\APXClient'
 		$scriptBlock='msiexec /i {0} /qr APX_WEBSERVER={1} ADDLOCAL=ALL INSTALLDIR="{2}"' -f $msiPath,$webBaseUrl,$installDir
-		
-		Stop-Process -name iexplore -force -ErrorAction SilentlyContinue
 		Invoke-Command -ScriptBlock { & cmd /c $scriptBlock}
 		
+		write-host 'Setting IE home page.'
 		$regScriptBlock='reg add "HKcu\Software\Microsoft\Internet Explorer\Main" /d {0}/APXLogin  /v "Start Page" /f'-f $webBaseUrl
 		Invoke-Command -ScriptBlock { & cmd /c $regScriptBlock}
 	}
 	else
 	{
-		$msg = 'Not Found: {0}' -f $msiPath
-		[System.Windows.Forms.MessageBox]::Show($msg,'Error',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+		ShowNotFoundError($msiPath)
 	}
 }
 
@@ -559,13 +598,11 @@ function InstallApxNextgen($buildPath,$apiUrl)
         $installFolder=Join-Path -Path ${env:ProgramFiles(x86)} -ChildPath 'Advent\APX\APXUI'
         $logfile=Join-Path -Path $installFolder -ChildPath 'UI_install.log'
 		$scriptBlock='msiexec /i {0} /qr WEBSITENAME="Default Web Site" APX_API_URL="{1}" INSTALLFOLDER="{2}" Ids_Username="admin" Ids_Password="advs"' -f $msiPath,$apiUrl,$installFolder
-		
 		Invoke-Command -ScriptBlock { & cmd /c $scriptBlock}
 	}
 	else
 	{
-		$msg = 'Not Found: {0}' -f $msiPath
-		[System.Windows.Forms.MessageBox]::Show($msg,'Error',[System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Error)
+		ShowNotFoundError($msiPath)
 	}
 }
 
