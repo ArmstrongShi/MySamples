@@ -4,6 +4,14 @@ namespace Advent.ApxSoap.Examples
     using Advent.ApxSoap.ApxWS;
     class ApxActivity
     {
+        public static void GetAllActivities(ApxWS apxWS)
+
+        {
+            ActivityQueryOptions queryOptions = new ActivityQueryOptions();
+            ActivityQueryResult queryResult;
+            apxWS.Activity_GetAll(ref queryOptions, out queryResult);
+        }
+
         /// <summary>
         /// This example shows how to create a new activity
         /// </summary>

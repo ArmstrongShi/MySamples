@@ -7,12 +7,12 @@ namespace Advent.ApxSoap
     {
         static void Main(string[] args)
         {
-            string apxWebUrl = "https://apx.company.com";
+            string apxWebUrl = "https://vmashi.advent.com";
             AuthClient client = new AuthClient(apxWebUrl);
-            ApxWS.ApxWS apxws = client.Login("web", "advs"); 
+            ApxWS.ApxWS apxws = client.Login("api", "advs");
             //apxws = client.Login(); // Win NT user
 
-            ApxActivity.CreateNewActivity(apxws);
+            ApxUser.ResetApiUserPassword(apxws);
 
             client.Logout();
         }

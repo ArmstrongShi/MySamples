@@ -6,6 +6,94 @@ namespace Advent.ApxSoap
 
     class ApxUser
     {
+
+        public static void CreateAPIUsers(ApxWS.ApxWS apxWS)
+        {
+            for (int i = 1; i <= 200; i++)
+            {
+                string loginName = $"api{i}";
+
+                UserPutOptions putOps = new UserPutOptions();
+                UserPutResult putRlt;
+                User user = new User();
+                user._DBAction = DBAction.Insert;
+
+                user._UpdatedFields = new UserUpdatedFields();
+
+                #region updated fields
+                user._UpdatedFields.LastName = true;
+                user.LastNameIsNull = false;
+                user.LastName = loginName;
+
+                user._UpdatedFields.LoginName = true;
+                user.LoginNameIsNull = false;
+                user.LoginName = loginName;
+
+                user._UpdatedFields.IsActive = true;
+                user.IsActive = true;
+
+                user._UpdatedFields.IsOSLogin = true;
+                user.IsOSLogin = false;
+                user.IsOSLoginIsNull = false;
+
+                user._UpdatedFields.AccessAllUserGroups = true;
+                user.AccessAllUserGroups = true;
+
+                user._UpdatedFields.AccessAllUsersRoleID = true;
+                user.AccessAllUsersRoleID = "Super API";
+                user.AccessAllUsersRoleIDIsNull = false;
+
+                user._UpdatedFields.CanAccessAllUsersPrivateData = true;
+                user.CanAccessAllUsersPrivateData = true;
+                user.CanAccessAllUsersPrivateDataIsNull = false;
+
+                user._UpdatedFields.DefaultRoleID = true;
+                user.DefaultRoleID = "Super API";
+
+                user._UpdatedFields.PrivateDataRoleId = true;
+                user.PrivateDataRoleId = "Super API";
+                user.PrivateDataRoleIdIsNull = false;
+
+                user._UpdatedFields.Password = true;
+                user.Password = "advs";
+                user.PasswordIsNull = false;
+                #endregion
+                Status status = apxWS.User_Put(ref putOps, user, out putRlt);
+
+                user._UpdatedFields.EmailAddress = true;
+                user.EmailAddressIsNull = false;
+                user.EmailAddress = $"{loginName}@example.com";
+                status = apxWS.User_Put(ref putOps, user, out putRlt);
+            }
+        }
+
+        public static void ResetApiUserPassword(ApxWS.ApxWS apxWS)
+        {
+            UserQueryOptions queryOptions = new UserQueryOptions();
+            UserQueryResult queryResult;
+
+            for (int i = 1; i <= 200; i++)
+            {
+                Status status = apxWS.User_GetByLoginName(ref queryOptions, $"api{i}", out queryResult);
+                foreach (User user in queryResult.UserList)
+                {
+                    user._DBAction = DBAction.Update;
+                    user._UpdatedFields = new UserUpdatedFields();
+                    user._UpdatedFields.Password = true;
+                    user.Password = "advs";
+                    user.PasswordIsNull = false;
+
+                    UserPutOptions putOps = new UserPutOptions();
+                    UserPutResult putRlt;
+                    status = apxWS.User_Put(ref putOps, user, out putRlt);
+                    Console.WriteLine("{0},{1}", user.LoginName, user.Password);
+
+                }
+            }
+
+            Console.ReadLine();
+        }
+
         /// <summary>
         /// This example shows how to create a new user
         /// </summary>
